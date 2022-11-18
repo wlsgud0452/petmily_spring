@@ -1,8 +1,10 @@
 package com.petmily.customer.service;
 
-import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
 
-@Service
-public class CustomerService {
+import org.springframework.ui.Model;
 
+public interface CustomerService {
+	public void execute(HttpServletRequest request, Model model);
+	public int executeInt(HttpServletRequest request, Model model);
 }
