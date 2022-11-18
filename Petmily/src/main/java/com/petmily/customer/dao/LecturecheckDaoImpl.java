@@ -12,7 +12,6 @@ public class LecturecheckDaoImpl implements LecturecheckDAO {
 	public void insertLecture(String uid, String categoryNum) throws Exception {
 		// TODO Auto-generated method stub
 		
-		System.out.println(categoryNum);
 		sqlSession.insert(nameSpace + ".insertLecture");
 	}
 

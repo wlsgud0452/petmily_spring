@@ -18,4 +18,15 @@ public class PetspecDAOImpl implements PetspecDAO {
 		return sqlSession.selectList(nameSpace + ".petSpecListFour");
 	}
 
+	@Override
+	public List<PetspecDTO> petSpecList(String pstype) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".petSpecList");
+	}
+
+	@Override
+	public String pscontent(String psbreeds) throws Exception {
+		return sqlSession.selectOne(nameSpace + ".pscontent");
+	}
+
 }

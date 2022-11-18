@@ -9,5 +9,12 @@
 		select psbreeds , psimage , pscontent from petspec where pstype = #{pstype} limit 4
 	</select>
 	
+	<select id="petSpecList" resultType="com.petmily.customer.dto.PetspecDTO">
+		select psbreeds, psimage, pscontent from petspec where pstype = #{pstype}
+	</select>
+	
+	<select id="pscontent" resultType="String">
+		select pscontent from petspec where psbreeds = #{psbreeds}
+	</select>
 	
 </mapper>
