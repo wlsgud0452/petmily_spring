@@ -19,7 +19,8 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public void execute(HttpServletRequest request, Model model) throws Exception {
 		// TODO Auto-generated method stub
-		
+		HttpSession session = request.getSession();
+		session.invalidate();	
 	}
 	
 	@Override

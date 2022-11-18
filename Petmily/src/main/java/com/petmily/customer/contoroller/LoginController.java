@@ -16,12 +16,12 @@ public class LoginController {
 	LoginService service;
 
 	@RequestMapping("/login_page")
-	public String loginPage() {
+	public String loginPage() throws Exception {
 		return "login";
 	}
 
-	@RequestMapping("login")
-	public String login(HttpServletRequest request, Model model) throws Exception{
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request, Model model) throws Exception {
 		int result = service.executeInt(request, model);
 
 		if (result == 0) {
@@ -30,6 +30,13 @@ public class LoginController {
 			return "login";
 		}
 
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request, Model model) throws Exception {
+		service.execute(request, model);
+		
+		return "redirect:home";
 	}
 
 }
