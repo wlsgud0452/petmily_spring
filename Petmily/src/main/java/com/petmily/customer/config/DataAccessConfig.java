@@ -13,6 +13,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 @Configuration
 @MapperScan(basePackages = "com.petmily.customer.dao")
 public class DataAccessConfig {
+	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
 		
@@ -31,11 +32,5 @@ public class DataAccessConfig {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 
-	
-	
-	
-	
-	
-	
 	
 }//----

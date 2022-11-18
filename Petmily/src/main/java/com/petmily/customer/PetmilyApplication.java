@@ -1,4 +1,4 @@
-package com.petmily;
+package com.petmily.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
