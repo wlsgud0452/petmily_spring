@@ -7,13 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.petmily.customer.service.ChallengeService;
+import com.petmily.customer.service.LectureCheckService;
 
 @Controller
 public class ChallengeController {
 
 	@Autowired
-	ChallengeService service;
+	LectureCheckService service;
 	
 	@RequestMapping("/challenge")
 	public String challenge() throws Exception {

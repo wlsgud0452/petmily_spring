@@ -11,7 +11,7 @@ import com.petmily.customer.dao.LecturecheckDAO;
 import com.petmily.customer.dto.UserDTO;
 
 @Service
-public class ChallengeServiceImpl implements ChallengeService {
+public class LectureCheckServiceImpl implements LectureCheckService {
 
 	@Autowired 
 	LecturecheckDAO lecturecheckDAO;
