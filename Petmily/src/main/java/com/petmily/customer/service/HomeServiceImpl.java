@@ -32,10 +32,5 @@ public class HomeServiceImpl implements HomeService {
 
 	}
 
-	@Override
-	public int executeInt(HttpServletRequest request, Model model) {
-		
-		return 0;
-	}
 
 }
