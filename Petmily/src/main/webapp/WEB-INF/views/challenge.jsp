@@ -120,7 +120,7 @@
 
 			<!-- 영상 나오는 곳 시작 -->
 			<div class="col-8 mx-5">
-				<form action="lecture_check.do" name="lectureCheck">
+				<form action="lecture_check" name="lectureCheck">
 					<input type="hidden" id="category_num" name="category_num">
 					<div class="row my-5 justify-content-center text-center">
 						<h3 id="title" style="color: #de6637"></h3>

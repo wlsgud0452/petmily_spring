@@ -29,7 +29,7 @@
 	</div>
 	
 	<div class="row justify-content-center text-center">
-		<form action="home.do">
+		<form action="home">
 			<input type="submit" class="btn btn-warning" value="홈 화면으로 이동">
 		</form>
 	</div>

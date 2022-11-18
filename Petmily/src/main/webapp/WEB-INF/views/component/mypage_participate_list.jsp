@@ -70,7 +70,7 @@
 		$('button[name=func2]').on("click", function() {
 			var index = $(this).parent().parent().index() / 3;
 			$('#index').val(index);
-			$("#applylist").attr("action", "apply_delete.do");
+			$("#applylist").attr("action", "apply_delete");
 			$('#applylist').submit();
 		})
 
@@ -80,7 +80,7 @@
 
 
 
-<form action="mypage_accept_complete_list.do" name="applylist" id="applylist">
+<form action="mypage_accept_complete_list" name="applylist" id="applylist">
 	<input type="hidden" name="message" id="message" value="${alert }">
 	<div class="container">
 		<div class="row my-3">
@@ -122,7 +122,7 @@
 						<c:set var="aptitle" value="${apply.aptitle }"/> 
 						<tr>
 							<th style="text-align: center;" scope="row"><a
-								href="posting_click.do?pid=${apply.posting_pid }">${fn:substring(aptitle,0,10)}</a></th>
+								href="posting_click?pid=${apply.posting_pid }">${fn:substring(aptitle,0,10)}</a></th>
 							<td>${fn:substring(apcontent,0,10)}<!-- 상세보기 띄는 곳 -->
 								<div class="my-4" id="detail-page-${status.count}"
 									style="display: none">
@@ -226,7 +226,7 @@
 						<c:otherwise>
 							<!-- else -->
 							<li class="page-item"><a class="page-link"
-								href="mypage_apply_list.do?page=${paging.startPage - 1}">Previous
+								href="mypage_apply_list?page=${paging.startPage - 1}">Previous
 							</a></li>
 						</c:otherwise>
 
@@ -235,7 +235,7 @@
 					<c:forEach var="count" begin="${paging.startPage}"
 						end="${paging.endPage}">
 						<li class="page-item"><a class="page-link"
-							href="mypage_apply_list.do?page=${count}">${count} </a></li>
+							href="mypage_apply_list?page=${count}">${count} </a></li>
 					</c:forEach>
 
 					<c:choose>
@@ -248,7 +248,7 @@
 						<c:otherwise>
 							<!-- else -->
 							<li class="page-item"><a class="page-link"
-								href="mypage_apply_list.do?page=${paging.endPage + 1}">Next
+								href="mypage_apply_list?page=${paging.endPage + 1}">Next
 							</a></li>
 						</c:otherwise>
 

@@ -57,7 +57,7 @@ $(document).ready(function(){
 		<div class="col-2 text-end align-self-center">조회수 :
 			${postingView}</div>
 		<!-- pid , user_uid , aptitle , apcontent -->
-		<form action="posting_apply_insert.do" name="posting_apply_insert" id="posting_apply_insert" method="get">
+		<form action="posting_apply_insert" name="posting_apply_insert" id="posting_apply_insert" method="get">
 			<div class="row justify-content-between my-2">
 				<div class="text-end">
 					<input type="hidden" name="user_uid" value="${postingUid }">
@@ -67,11 +67,11 @@ $(document).ready(function(){
 					<c:choose>
 						<c:when test="${user_uid eq postAuthor}">
 							<button class="btn btn-primary col-1 gy-2 align-self-center"
-								type="button" onclick="location.href='posting_modify.do?pid=${pid}&pcategory=${postingDetail.pcategory}'" 
+								type="button" onclick="location.href='posting_modify?pid=${pid}&pcategory=${postingDetail.pcategory}'" 
 								style="margin-top: 1.5rem; padding-top: 0.7rem; padding-bottom: 0.7rem;">수정하기</button>
 
 							<button class="btn btn-danger col-1 gy-2 align-self-center"
-								type="button" onclick="location.href='posting_delete.do?pid=${pid}&pcategory=${postingDetail.pcategory}'"
+								type="button" onclick="location.href='posting_delete?pid=${pid}&pcategory=${postingDetail.pcategory}'"
 								style="margin-top: 1.5rem; padding-top: 0.7rem; padding-bottom: 0.7rem;">삭제하기</button>
 						</c:when>
 						<c:otherwise>
@@ -144,7 +144,7 @@ $(document).ready(function(){
 				<!-- 좋아요를 누른 경우 -->
 				<button type="button" class="btn btn-outline-danger active"
 					data-bs-toggle="button" aria-pressed="true"
-					onclick="location.href='posting_like_click.do?likeCheck=${likeCheck}&pid=${pid}'">
+					onclick="location.href='posting_like_click?likeCheck=${likeCheck}&pid=${pid}'">
 					<i class="bi bi-heart" style="font-size: 1.5rem;"></i>
 				</button>
 			</c:if>
@@ -152,7 +152,7 @@ $(document).ready(function(){
 			<c:if test="${likeCheck eq '0'}">
 				<button type="button" class="btn btn-outline-danger"
 					data-bs-toggle="button" aria-pressed="false"
-					onclick="location.href='posting_like_click.do?likeCheck=${likeCheck}&pid=${pid}'">
+					onclick="location.href='posting_like_click?likeCheck=${likeCheck}&pid=${pid}'">
 					<i class="bi bi-heart" style="font-size: 1.5rem;"></i>
 				</button>
 			</c:if>
@@ -193,7 +193,7 @@ $(document).ready(function(){
 		</div>
 	</c:forEach>
 
-	<form action="posting_reply_insert.do" method="get" id="reply">
+	<form action="posting_reply_insert" method="get" id="reply">
 		<div class="row justify-content-center my-5">
 			<div class="col-6">
 				<input type="text" class="form-control" name="ureply"

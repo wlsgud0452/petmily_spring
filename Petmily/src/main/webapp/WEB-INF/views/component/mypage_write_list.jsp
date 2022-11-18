@@ -21,7 +21,7 @@
 
 		var pcategory = document.getElementById('pcategory').value
 
-		form.action = 'posting_write.do?pcategory=' + pcategory
+		form.action = 'posting_write?pcategory=' + pcategory
 
 		form.submit()
 
@@ -29,7 +29,7 @@
 </script>
 
 <div class="container">
-	<form action="mypage_write_list.do" name="posting">
+	<form action="mypage_write_list" name="posting">
 
 		<%
 			String param = request.getParameter("pcategory");
@@ -125,7 +125,7 @@
 						<tr>
 							<th scope="row">${paging.endRow - status.index }</th>
 							<td><a
-								href="posting_click.do?pid=${list.pid }&user_uid=${list.user_uid}">${list.ptitle }</a></td>
+								href="posting_click?pid=${list.pid }&user_uid=${list.user_uid}">${list.ptitle }</a></td>
 							<td>${list.user_uid }</td>
 							<td>${list.pinitdate }</td>
 							<td>${list.plocation }</td>
@@ -151,7 +151,7 @@
 						<c:otherwise>
 							<!-- else -->
 							<li class="page-item"><a class="page-link"
-								href="mypage_write_list.do?page=${paging.startPage - 1}&pcategory=${param.pcategory }">Previous
+								href="mypage_write_list?page=${paging.startPage - 1}&pcategory=${param.pcategory }">Previous
 							</a></li>
 						</c:otherwise>
 
@@ -160,7 +160,7 @@
 					<c:forEach var="count" begin="${paging.startPage}"
 						end="${paging.endPage}">
 						<li class="page-item"><a class="page-link"
-							href="mypage_write_list.do?page=${count}&pcategory=${param.pcategory }">${count}
+							href="mypage_write_list?page=${count}&pcategory=${param.pcategory }">${count}
 						</a></li>
 					</c:forEach>
 
@@ -174,7 +174,7 @@
 						<c:otherwise>
 							<!-- else -->
 							<li class="page-item"><a class="page-link"
-								href="mypage_write_list.do?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next
+								href="mypage_write_list?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next
 							</a></li>
 						</c:otherwise>
 

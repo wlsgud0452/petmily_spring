@@ -73,7 +73,7 @@
 	}
 </script>
 
-<form action="posting_midify_update.do" enctype="multipart/form-data" method="post" name="board_write">
+<form action="posting_midify_update" enctype="multipart/form-data" method="post" name="board_write">
 	<div class="container">
 		<div class="row text-center">
 			<h4>

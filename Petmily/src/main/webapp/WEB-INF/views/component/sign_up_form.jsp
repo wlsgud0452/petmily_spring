@@ -312,7 +312,7 @@
 </script>
 
 <div class="container">
-	<form action="sign_up.do" name="signup" method="post"
+	<form action="sign_up" name="signup" method="post"
 		enctype="multipart/form-data">
 		<!-- 선택된 사진 보이는 곳 -->
 		<div class="row jstify-content-center">
@@ -442,7 +442,7 @@
 			<div class="col-1 gy-2"></div>
 		</div>
 
-		<!-- 주소 검색 do 이름 : address_search.do -->
+		<!-- 주소 검색 do 이름 : address_search -->
 		<!-- 주소 -->
 		<div class="row justify-content-center ">
 			<div class="col-4 mb-3 gy-2">

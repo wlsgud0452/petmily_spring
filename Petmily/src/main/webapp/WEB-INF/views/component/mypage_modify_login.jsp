@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<form action="mypage_modify_login.do">
+<form action="mypage_modify_login">
 
 	<div class="container">
 	

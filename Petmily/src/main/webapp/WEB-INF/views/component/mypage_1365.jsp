@@ -5,13 +5,13 @@
 function search(){
 	var form = document.mypage_1365
 	
-	form.action = 'mypage_1365_search.do'
+	form.action = 'mypage_1365_search'
 	
 	form.submit()
 }
 
 </script>
-<form action="mypage_1365_insert.do" name="mypage_1365">
+<form action="mypage_1365_insert" name="mypage_1365">
 <div id="content" class="ps-4">
 		<div style="color: #e8853e;">
 			<h2>

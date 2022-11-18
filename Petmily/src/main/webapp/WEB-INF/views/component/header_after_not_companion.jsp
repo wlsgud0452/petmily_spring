@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg shadow-sm">
 	<div class="container-fluid">
-			<a class="navbar-brand" href="home.do"><img
+			<a class="navbar-brand" href="home"><img
 				src="component/images/logo.png" width="45" height="40"
 				style="margin-right: 1rem;"> PETMILY</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -17,35 +17,35 @@
 			<ul class="navbar-nav mx-auto">
 
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="home.do"> HOME</a></li>
+					aria-current="page" href="home"> HOME</a></li>
 
 				<li class="nav-item"><a class="nav-link mx-2"
-					href="pet_dictionary_card.do?pstype=dog">펫과사전</a></li>
+					href="pet_dictionary_card?pstype=dog">펫과사전</a></li>
 
 				<li class="nav-item"><a class="nav-link mx-2"
-					href="challenge.do">도전</a></li>
+					href="challenge">도전</a></li>
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle mx-2"
-					href="posting.do?pcategory=volunteer" role="button"
+					href="posting?pcategory=volunteer" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> 함께 </a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item"
-							href="posting.do?pcategory=volunteer">함께 봉사</a></li>
-						<li><a class="dropdown-item" href="posting.do?pcategory=walk">함께
+							href="posting?pcategory=volunteer">함께 봉사</a></li>
+						<li><a class="dropdown-item" href="posting?pcategory=walk">함께
 								산책</a></li>
 						<li><a class="dropdown-item"
-							href="posting.do?pcategory=petcafe">함께 펫카페</a></li>
+							href="posting?pcategory=petcafe">함께 펫카페</a></li>
 					</ul></li>
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle mx-2"
-					href="posting.do?pcategory=find" role="button"
+					href="posting?pcategory=find" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> 구조 </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="posting.do?pcategory=find">찾아주세요</a></li>
+						<li><a class="dropdown-item" href="posting?pcategory=find">찾아주세요</a></li>
 						<li><a class="dropdown-item"
-							href="posting.do?pcategory=found">찾았어요</a></li>
+							href="posting?pcategory=found">찾았어요</a></li>
 					</ul></li>
 			</ul>
 
@@ -60,12 +60,12 @@
 						class="bi bi-bell" style="font-size: 1.5rem;"></i></a></li>
 
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle mx-2" href="mypage_modify.do"
+					class="nav-link dropdown-toggle mx-2" href="mypage_modify"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						${user.uid } </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="mypage_modify.do">마이페이지</a></li>
-						<li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
+						<li><a class="dropdown-item" href="mypage_modify">마이페이지</a></li>
+						<li><a class="dropdown-item" href="logout">로그아웃</a></li>
 					</ul></li>
 				<c:choose>
 					<c:when test="${user.uimage eq null }">

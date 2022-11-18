@@ -59,7 +59,7 @@
 		</div>
 
 		<div class="text-center">
-			<form class="mb-3" name="reviewStar" action="test.do" id="myform" method="get">
+			<form class="mb-3" name="reviewStar" action="test" id="myform" method="get">
 				<fieldset>
 					<input type="radio" name="reviewStar" value="5" id="rate1"><label
 						for="rate1">★</label>

@@ -18,12 +18,12 @@ $(document).ready(function(){
 	$('button[name=detail]').click(function(){
 		
 		
-		location.href = 'pet_dictionary_card.do?pstype=' + $('#pstype').val();
+		location.href = 'pet_dictionary_card?pstype=' + $('#pstype').val();
 	})
 });
 </script>
 	<section class="featured-product section-padding mb-15">
-		<form action = "home.do" name="homeSlide1">
+		<form action = "home" name="homeSlide1">
 		<div class="container ml-0 mr-0">
 			<div class="row">
 
@@ -65,7 +65,7 @@ $(document).ready(function(){
 				</div>
 				<div class="col-12 text-center">
 					<!-- 자세히 보기 링크 펫과사전으로 걸어야 함 -->
-					<a href="pet_dictionary_card.do?pstype=dog" class="view-all">펫과사전 전체 보기</a>
+					<a href="pet_dictionary_card?pstype=dog" class="view-all">펫과사전 전체 보기</a>
 				</div>
 
 			</div>
