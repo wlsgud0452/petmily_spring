@@ -1,8 +1,10 @@
 package com.petmily.admin.sevice;
 
-import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletRequest;
 
-@Service
-public class AdminService {
+import org.springframework.ui.Model;
 
+public interface AdminService {
+	public void execute(HttpServletRequest request, Model model);
+	public int executeInt(HttpServletRequest request, Model model);
 }
