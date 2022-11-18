@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg shadow-sm">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="home"><img
-			src="component/images/logo.png" width="45" height="40"
+			src="component/logo.png" width="45" height="40"
 			style="margin-right: 1rem;"> PETMILY</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"

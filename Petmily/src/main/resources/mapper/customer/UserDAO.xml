@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.UserDAO">
+	
+	<select id="userPwCheck" resultType="Integer">
+		select count(*) from user where uid = #{uid} and upw = #{upw}
+	</select>
+	
+	<select id="login" resultType="com.petmily.customer.dto.UserDTO">
+		select count(*), uid , uname, utype, uimage from user where uid = #{uid} and upw = #{upw}
+	</select>
+	
+	
+</mapper>

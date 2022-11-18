@@ -28,7 +28,7 @@ public class IndexController {
 		
 		service.execute(request, model);
 		
-		return "home";
+		return "redirect:";
 	}
 	
 	
