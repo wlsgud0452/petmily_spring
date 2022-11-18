@@ -12,6 +12,16 @@ public class ChooseDTO {
 	public ChooseDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public ChooseDTO(int pet_petid, int petspec_psid) {
+		super();
+		this.pet_petid = pet_petid;
+		this.petspec_psid = petspec_psid;
+	}
+
+
 
 	public ChooseDTO(int choid, Timestamp chodate, int pet_petid, int petspec_psid) {
 		super();

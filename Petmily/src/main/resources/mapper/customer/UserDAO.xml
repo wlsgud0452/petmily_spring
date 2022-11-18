@@ -13,5 +13,10 @@
 		select count(*), uid , uname, utype, uimage from user where uid = #{uid} and upw = #{upw}
 	</select>
 	
+	<insert id="insert">
+		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress, utype, uimage , uinitdate) 
+		values 
+		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress} , #{utype} ,#{uimage} , now())
+	</insert>
 	
 </mapper>

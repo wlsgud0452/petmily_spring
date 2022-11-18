@@ -9,5 +9,10 @@
 		select psbreeds , psimage , pscontent from petspec where pstype = #{pstype} limit 4
 	</select>
 	
+	<select id="selectPsId" resultType="Integer" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator="," >		
+			select psid from petspec where pstype = #{item.pstype} and psbreeds = #{item.psbreeds}
+		</foreach>
+	</select>
 	
 </mapper>

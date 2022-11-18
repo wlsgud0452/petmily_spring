@@ -17,5 +17,10 @@ public class PetspecDAOImpl implements PetspecDAO {
 		
 		return sqlSession.selectList(nameSpace + ".petSpecListFour");
 	}
-
+	
+	@Override
+	public List<Integer> selectPsId(List<PetspecDTO> list) throws Exception {
+		
+		return sqlSession.selectList(nameSpace + ".selectPsId");
+	}
 }

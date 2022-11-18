@@ -21,5 +21,11 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".login");
 	}
-
+	
+	@Override
+	public void insert(String uid, String upw, String uname, String uphone, String uemail, String unickname,
+			String uaddress, String utype, String uimage) throws Exception {
+		
+		sqlSession.insert(nameSpace + ".insert");
+	}
 }
