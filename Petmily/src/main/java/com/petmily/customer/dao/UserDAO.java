@@ -9,4 +9,6 @@ public interface UserDAO {
 
 	public void insert(String uid, String upw, String uname, String uphone, String uemail, String unickname,
 			String uaddress, String utype, String uimage) throws Exception;
+	
+	public int registerCheck(String uid) throws Exception;
 }

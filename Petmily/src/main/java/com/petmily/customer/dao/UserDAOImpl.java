@@ -28,4 +28,10 @@ public class UserDAOImpl implements UserDAO {
 		
 		sqlSession.insert(nameSpace + ".insert");
 	}
+	
+	@Override
+	public int registerCheck(String uid) throws Exception {
+		
+		return sqlSession.selectOne(nameSpace + ".registerCheck");
+	}
 }

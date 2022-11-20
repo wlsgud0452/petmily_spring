@@ -13,7 +13,7 @@ public class PetDAOImpl implements PetDAO {
 	public static String nameSpace = "com.petmily.customer.dao.PetDAO";
 
 	@Override
-	public void insert2(List<PetDTO> list, String uid) throws Exception {
+	public void insert(List<PetDTO> list, String uid) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.insert(nameSpace + ".insert");
 	}

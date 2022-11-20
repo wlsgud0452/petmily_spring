@@ -3,13 +3,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
-<mapper namespace="com.petmily.customer.dao.PetDAO">
+<mapper namespace="com.petmily.customer.dao.ChooseDAO">
 	
-	<insert id="insert3" parameterType="java.util.List">
-		<foreach collection="list" item="item" separator="," >
+	<insert id="insert" parameterType="java.util.List">
 		insert into choose (pet_petid ,petspec_psid, chodate) 
 		values 
-		( #{item.pet_petid} , #{item.petspec_psid} ,now() ) 
+		<foreach collection="list" item="item" separator="," >
+			( #{item.pet_petid} , #{item.petspec_psid} ,now() ) 
 		</foreach>
 	</insert>
 	

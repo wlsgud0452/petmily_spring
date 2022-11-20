@@ -13,7 +13,7 @@ public class ChooseDAOImpl implements ChooseDAO {
 	public static String nameSpace = "com.petmily.customer.dao.ChooseDAO";
 	
 	@Override
-	public void insert3(List<ChooseDTO> list) throws Exception {
+	public void insert(List<ChooseDTO> list) throws Exception {
 		
 		sqlSession.insert(nameSpace + ".insert");
 	}

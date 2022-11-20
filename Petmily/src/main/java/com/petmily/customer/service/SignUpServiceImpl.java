@@ -2,8 +2,10 @@ package com.petmily.customer.service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,6 @@ import com.petmily.customer.dao.PetspecDAO;
 import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.ChooseDTO;
 import com.petmily.customer.dto.PetDTO;
-import com.petmily.customer.dto.PetspecDTO;
 
 @Service
 public class SignUpServiceImpl implements SignupService {
@@ -36,24 +37,22 @@ public class SignUpServiceImpl implements SignupService {
 
 	@Override
 	public void execute(MultipartHttpServletRequest request, Model model, MultipartFile file) throws Exception {
-		String uimage = null;
-		String uid = null;
+		String uimage = "";
+		String uid = "";
 
 		// 파일 저장하는 방법 [S]
 		// 패스 지정
 		if (!(file == null)) {
-			String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\user";
+			String path = System.getProperty("user.dir") + "//src//main//resources//static//user";
 
-			// 식별자 생성
-			UUID uuid = UUID.randomUUID();
-			// 파일을 식별자 + uid로 만들기 위한 기초단계
+			// 파일을 uid로 만들기 위한 기초단계
 			uid = request.getParameter("uid");
 			// 확장자 가져오기
 			String originalName = file.getOriginalFilename();
 			String extension = originalName.substring(originalName.indexOf("."), originalName.length());
 
 			// 파일 네임 짓기
-			uimage = uuid + "_" + uid + extension;
+			uimage = uid + extension;
 			// 패스에 "name" 으로 saveFile을 만들 빈 껍데기를 생성해 준다.
 			File saveFile = new File(path, uimage);
 			// file을 saveFile이름과 path로 지어서 넣기
@@ -86,7 +85,7 @@ public class SignUpServiceImpl implements SignupService {
 
 		// database user table에 insert 하기
 		userDAO.insert(uid, upw, uname, uphone, uemail, unickname, uaddress, utype, uimage);
-
+		
 		if (utype.equals("companion")) {
 			// pet table에 들어가야 될 값들
 			// petname
@@ -97,7 +96,7 @@ public class SignUpServiceImpl implements SignupService {
 			
 			// petname, petgender List<PetDTO>로 바꾸기
 			List<PetDTO> list = new ArrayList<>();
-			for(int i = 0 ; i< petname.length ; i++) {
+			for(int i = 1 ; i< petname.length ; i++) {
 				PetDTO dto = new PetDTO(petname[i], petgender[i]);
 				list.add(dto);
 			}
@@ -108,19 +107,19 @@ public class SignUpServiceImpl implements SignupService {
 			// petid list select 해오기
 			List<Integer> petIdList = petDAO.selectPetId(uid);
 			// pstype
-			String[] pstype = request.getParameterValues("pstype");
+			String[] pstypeArr = request.getParameterValues("pstype");
 			// psbreeds
-			String[] psbreeds = request.getParameterValues("psbreeds");
+			String[] psbreedsArr = request.getParameterValues("psbreeds");
 			
-			List<PetspecDTO> list2 = new ArrayList<>();
-			for(int i = 0 ; i< pstype.length ; i++) {
-				PetspecDTO dto = new PetspecDTO(pstype[i], psbreeds[i]);
-				list2.add(dto);
-			}
+			List<String> pstype = new ArrayList<String>(Arrays.asList(pstypeArr));
+			List<String> psbreeds = new ArrayList<String>(Arrays.asList(psbreedsArr));
 			
 			// pstype 과 psbreeds로 맞는 psid list 가져오기
-			List<Integer> psidList = petspecDAO.selectPsId(list2);
-				
+			List<Integer> psidList = petspecDAO.selectPsId(pstype , psbreeds);
+			
+			System.out.println("petid : " + petIdList.size());
+			System.out.println("psid : " + psidList.size());
+			
 			List<ChooseDTO> list3 = new ArrayList<>();
 			for(int i=0; i<petIdList.size() ;i++) {
 				ChooseDTO dto = new ChooseDTO(petIdList.get(i), psidList.get(i));
@@ -132,6 +131,23 @@ public class SignUpServiceImpl implements SignupService {
 
 		}
 
+	}
+	
+	@Override
+	public int executeTwo(HttpServletRequest request) throws Exception {
+		
+		String uid = request.getParameter("uid");
+		
+		return userDAO.registerCheck(uid);
+		
+	}
+	
+	@Override
+	public String executeThree(HttpServletRequest request) throws Exception {
+		
+		String pstype = request.getParameter("pstype");
+		
+		return petspecDAO.psbreedsList(pstype).toString();
 	}
 
 }

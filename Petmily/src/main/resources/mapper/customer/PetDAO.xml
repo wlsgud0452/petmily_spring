@@ -5,11 +5,10 @@
 
 <mapper namespace="com.petmily.customer.dao.PetDAO">
 
-	<insert id="insert2" parameterType="java.util.List">
+	<insert id="insert" parameterType="java.util.List">
+		insert into pet (petname , petgender ,user_uid , petinitdate) values
 		<foreach collection="list" item="item" separator=",">
-		insert into pet (petname,petgender,user_uid , petinitdate) 
-		values 
-			( #{item.petname} , #{item.petgender} ,#{uid} , now() )
+			(#{item.petname} , #{item.petgender} ,#{uid} , now() )
 		</foreach>
 	</insert>
 
