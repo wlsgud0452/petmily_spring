@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.PostingDAO">
+
+	<select id="postingListRow" resultType="Integer">
+		select count(*) from posting where pdeletedate is null and pcategory =#{pcategory}
+	</select>
+	
+	<select id="postingGetList" resultType="com.petmily.customer.dto.PostingDTO">
+		select pid, ptitle, plocation, pinitdate, user_uid, pcategory from posting 
+		where pcategory = #{pcategory} and pdeletedate is null and #{option} 
+		like #{query} order by pid desc limit #{start},#{rowLength}
+	</select>
+	
+	
+	
+</mapper>

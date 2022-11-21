@@ -2,6 +2,7 @@ package com.petmily.customer.dto;
 
 public class PagingDTO {
 	int cPage;
+	int totalRows;
 	int currentBlock;
 	int pageLength;
 	int startPage;
@@ -9,16 +10,11 @@ public class PagingDTO {
 	int totalPages;
 	int startRow;
 	int endRow;
+	
 	public PagingDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
-	
-
-
-
 	public PagingDTO(int cPage, int currentBlock, int pageLength, int startPage, int endPage, int totalPages,
 			int startRow, int endRow) {
 		super();
@@ -31,12 +27,31 @@ public class PagingDTO {
 		this.startRow = startRow;
 		this.endRow = endRow;
 	}
+	
+	
 
 
+	public PagingDTO(int cPage, int totalRows, int pageLength) {
+		super();
+		this.cPage = cPage;
+		this.totalRows = totalRows;
+		this.pageLength = pageLength;
 
+		totalPages = totalRows % pageLength == 0 ? totalRows / pageLength : (totalRows / pageLength) + 1;
 
+		currentBlock = cPage % pageLength == 0 ? cPage / pageLength : (cPage / pageLength) + 1;
+		startPage = (currentBlock - 1) * pageLength + 1;
+		endPage = startPage + pageLength - 1;
 
+		startRow = (cPage - 1) * pageLength;
+		endRow = totalRows - startRow;
 
+		if (endPage > totalPages) {
+			endPage = totalPages;
+		}
+	}
+	
+	
 
 	public int getcPage() {
 		return cPage;
@@ -87,12 +102,9 @@ public class PagingDTO {
 	}
 
 
-
 	public int getStartRow() {
 		return startRow;
 	}
-
-
 
 	public void setStartRow(int startRow) {
 		this.startRow = startRow;
