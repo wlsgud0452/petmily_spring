@@ -14,5 +14,23 @@ public class LecturecheckDaoImpl implements LecturecheckDAO {
 		
 		sqlSession.insert(nameSpace + ".insertLecture");
 	}
-
+	
+	@Override
+	public int selectChapterOne(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".selectChapterOne");
+	}
+	
+	@Override
+	public int selectChapterTwo(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".selectChapterTwo");
+	}
+	
+	@Override
+	public int selectChapterThree(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".selectChapterThree");
+	}
+	
 }

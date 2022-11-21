@@ -3,7 +3,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#"> <img src="component/images/gold_foot.png"
+			<a class="navbar-brand" href="#"> <img src="component/gold_foot.png"
 				width="24" height="24">
 			</a>
 			<button class="navbar-toggler" type="button"

@@ -10,4 +10,16 @@
 	</insert>
 	
 	
+	<select id="selectChapterOne" resultType="Integer">
+		select count(distinct lecture_lid) from lecturecheck where user_uid = #{uid} and lecture_lid like '1%'	
+	</select>
+	
+	<select id="selectChapterTwo" resultType="Integer">
+		select count(distinct lecture_lid) from lecturecheck where user_uid = #{uid} and lecture_lid like '2%'	
+	</select>
+	
+	<select id="selectChapterThree" resultType="Integer">
+		select count(distinct lecture_lid) from lecturecheck where user_uid = #{uid} and lecture_lid like '3%'	
+	</select>
+	
 </mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.ApplyDAO">
+	
+	<select id="selectCategory" resultType="Integer">
+		select count(*) from apply a, posting p where a.apcompletedate is not null 
+		and ( a.user_uid = #{uid} or a.posting_user_uid = #{uid} ) 
+		and a.posting_pid = p.pid and p.pcategory = #{pcategory}
+	</select>
+	
+</mapper>
