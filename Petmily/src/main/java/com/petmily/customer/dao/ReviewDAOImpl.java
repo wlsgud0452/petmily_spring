@@ -13,5 +13,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		return sqlSession.selectOne(nameSpace + ".selectRating");
 	}
+	
+	@Override
+	public void insert(String revtext, int revrating, String from_uid, String posting_pid, String to_uid)
+			throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.insert(nameSpace + ".insert");
+	}
 
 }

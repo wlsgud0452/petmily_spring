@@ -15,4 +15,13 @@
 		like #{query} order by pid desc limit #{start} ,#{rowLength}
 	</select>
 	
+	
+	<select id="acceptPostingList" resultType="com.petmily.customer.dto.PostingDTO">
+		select p.pid , p.user_uid , p.pcategory , p.ptitle , p.pinitdate , p.plocation
+		from posting p inner join apply a
+		where p.pid = a.posting_pid and a.user_uid = #{uid} 
+		and a.apcanceldate is null and a.apmatchingdate is not null and a.apcompletedate is null
+		order by a.apmatchingdate limit #{start}, #{rowLength}
+	</select>
+	
 </mapper>

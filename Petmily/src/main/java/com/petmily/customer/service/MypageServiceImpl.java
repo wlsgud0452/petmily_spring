@@ -12,10 +12,12 @@ import org.springframework.ui.Model;
 
 import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.LecturecheckDAO;
+import com.petmily.customer.dao.PostingDAO;
 import com.petmily.customer.dao.ReviewDAO;
 import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.ApplyDTO;
 import com.petmily.customer.dto.PagingDTO;
+import com.petmily.customer.dto.PostingDTO;
 import com.petmily.customer.dto.UserDTO;
 
 @Service
@@ -32,6 +34,9 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	ReviewDAO reviewDAO;
+	
+	@Autowired
+	PostingDAO postingDAO;
 	
 	@Override
 	public int myPageModifyLogin(HttpServletRequest request , HttpSession session) throws Exception {
@@ -274,6 +279,79 @@ public class MypageServiceImpl implements MypageService {
 		
 		// review table에 그거 업데이트
 		applyDAO.updateByApId(Integer.parseInt(apid),columnname);
+	}
+	
+	@Override
+	public void myPageAcceptList(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		UserDTO udto = (UserDTO) session.getAttribute("user");
+		String uid = udto.getUid();
+		
+		int cPage = 0;
+		int pageLength = 5;
+		int totalRows = 0;
+		int rowLength=5;
+		String tempPage = request.getParameter("page");
+		
+		if(tempPage == null || tempPage.length()==0) {
+			cPage = 1;
+		}
+		try {
+			cPage = Integer.parseInt(tempPage);
+		} catch (Exception e) {
+			cPage = 1;
+		}
+		// paging 에 필요한 요소들 [S]
+		totalRows = applyDAO.acceptListRow(uid);
+		PagingDTO dto =  new PagingDTO(cPage, totalRows, pageLength);
+		int start = (cPage - 1) * rowLength;
+		// [E]
+		List<Integer> acceptApidList = applyDAO.acceptApidList(uid);
+		List<PostingDTO> acceptPostingList = postingDAO.acceptPostingList(uid , rowLength, start);
+		
+		model.addAttribute("paging",dto);
+		model.addAttribute("acceptList", acceptPostingList);
+		model.addAttribute("apidList", acceptApidList);
+		
+	}
+	
+	@Override
+	public void myPageAcceptComplete(HttpServletRequest request, Model model) throws Exception {
+		// apid , posting_user_uid , posting_pid 를 받아와야 된다. 
+		String[] apidArr = request.getParameterValues("apid");
+		String index = request.getParameter("index");
+		String apid = apidArr[Integer.parseInt(index)];
+		String posting_user_uid = request.getParameter("posting_user_uid");
+		String posting_pid = request.getParameter("posting_pid");
+		
+		// apid의 apcompletedate를 완료 누른 날짜로 바꿔주면 된다.
+		String columnname= "apcompletedate";
+		applyDAO.updateByApId(Integer.parseInt(apid) , columnname);
+		
+		// review 작성 화면에서 필요한 posting_user의 uimage를 가져온다. 
+		String posting_user_uimage = userDAO.selectUimage(posting_user_uid);
+		
+		// review 작성하고 나서 데이터베이스에 넣어줄
+		// posting_user_uid 와 posting_pid 값을 넘겨준다. 
+		model.addAttribute("to_uid", posting_user_uid );
+		model.addAttribute("posting_pid", posting_pid );
+		model.addAttribute("to_uimage", posting_user_uimage );
+		
+	}
+	
+	@Override
+	public void myPageReviewInsert(HttpServletRequest request, HttpSession session) throws Exception {
+		String revtext = request.getParameter("content");
+		String revrating = request.getParameter("reviewStar");
+		
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		String from_uid = user.getUid();
+		String posting_pid = request.getParameter("posting_pid");
+		String to_uid = request.getParameter("to_uid");
+		
+		reviewDAO.insert(revtext, Integer.parseInt(revrating) , from_uid , posting_pid , to_uid);
+		
+		
 	}
 
 }

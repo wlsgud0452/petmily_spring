@@ -41,4 +41,18 @@ public class ApplyDAOImpl implements ApplyDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + ".updateByPId");
 	}
+	
+	@Override
+	public int acceptListRow(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".acceptListRow");
+	}
+	
+	@Override
+	public List<Integer> acceptApidList(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".acceptApidList");
+	}
+	
+	
 }

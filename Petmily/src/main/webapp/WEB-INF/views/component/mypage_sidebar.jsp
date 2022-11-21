@@ -23,10 +23,18 @@
 			 <p class="h5"><a class="nav-link" href="mypage_apply_list" style="color:black;">신청 내역</a></p>
 			</li>
 		</c:if>
-		  
-		   <li class="nav-item my-2">
-		   <p class="h5"><a class="nav-link" href="mypage_accept_list" style="color:black;">진행 내역</a></p>
-		  </li>
+		
+		<c:if test="${user.utype eq 'companion' }">
+			<li class="nav-item my-2">
+			 <p class="h5"><a class="nav-link" href="mypage_accepted_list" style="color:black;">신청 수락한 내역</a></p>
+			</li>
+		</c:if>
+		
+		<c:if test="${user.utype eq 'unaccompanion' }">
+			<li class="nav-item my-2">
+			 <p class="h5"><a class="nav-link" href="mypage_accept_list" style="color:black;">신청 수락된 내역</a></p>
+			</li>
+		</c:if>
 		  
 	</ul>
 	 

@@ -27,5 +27,11 @@ public class PostingDAOImpl implements PostingDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + ".postingGetList");
 	}
+	
+	@Override
+	public List<PostingDTO> acceptPostingList(String uid, int rowLength, int start) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".acceptPostingList");
+	}
 
 }

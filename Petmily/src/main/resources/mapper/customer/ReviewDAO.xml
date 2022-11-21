@@ -9,4 +9,10 @@
 		select sum(revrating) from review where to_uid = #{uid} group by to_uid
 	</select>
 	
+	<insert id="insert">
+		insert into review (revtext, revrating, from_uid, posting_pid, to_uid)
+		values
+		(#{revtext},#{revrating}, #{from_uid}, #{posting_pid}, #{to_uid})
+	</insert>
+	
 </mapper>

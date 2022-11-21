@@ -11,4 +11,5 @@ public interface PostingDAO {
 	
 	public List<PostingDTO> postingGetList(int cPage, int rowLength, String pcategory, String option, String query,int start) throws Exception;
 	
+	public List<PostingDTO> acceptPostingList(String uid , int rowLength, int start) throws Exception;
 }

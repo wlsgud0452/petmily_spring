@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -43,7 +44,7 @@ public class SignUpServiceImpl implements SignupService {
 	JavaMailSender javaMailSender;
 
 	@Override
-	public void signup(MultipartHttpServletRequest request, Model model, MultipartFile file) throws Exception {
+	public void signup(MultipartHttpServletRequest request, Model model,MultipartFile file) throws Exception {
 		String uimage = "";
 		String uid = "";
 
@@ -51,7 +52,6 @@ public class SignUpServiceImpl implements SignupService {
 		// 패스 지정
 		if (!(file == null)) {
 			String path = System.getProperty("user.dir") + "//src//main//resources//static//user";
-
 			// 파일을 uid로 만들기 위한 기초단계
 			uid = request.getParameter("uid");
 			// 확장자 가져오기

@@ -80,4 +80,29 @@ public class MypageController {
 		return "redirect:mypage_apply_list";
 	}
 	
+	@RequestMapping("/mypage_accept_list")
+	public String myPageAcceptList(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageAcceptList(request, model, session);
+		
+		return "mypage_accept_list";
+	}
+	
+	@RequestMapping("/mypage_accept_complete")
+	public String myPageAcceptComplete(HttpServletRequest request, Model model) throws Exception {
+		service.myPageAcceptComplete(request, model);
+		
+		return "mypage_review";
+	}
+	
+	@RequestMapping("/review_insert")
+	public String myPageReviewInsert(HttpServletRequest request, HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageReviewInsert(request, session);
+		
+		return "redirect:mypage_accept_list";
+	}
+	
 }

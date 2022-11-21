@@ -24,6 +24,17 @@
 		order by a.apdate desc limit #{start}  , #{rowLength}
 	</select>
 	
+	<select id="acceptListRow" resultType="Integer">
+		select count(*) from apply where user_uid = #{uid} 
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+	</select>
+	
+	<select id="acceptApidList" resultType="Integer">
+		select apid from apply where user_uid = #{uid}
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+		order by apmatchingdate 
+	</select>
+	
 	<update id="updateByApId">
 		update apply set ${columnname} = now() where apid = #{apid}
 	</update>
@@ -31,5 +42,6 @@
 	<update id="updateByPId">
 		update apply set apcanceldate = now() where posting_pid = #{pid} and apmatchingdate is null
 	</update>
+	
 	
 </mapper>
