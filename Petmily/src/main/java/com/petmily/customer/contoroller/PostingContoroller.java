@@ -15,7 +15,7 @@ public class PostingContoroller {
 	@Autowired
 	PostingService postingService;
 	
-	@RequestMapping("posting")
+	@RequestMapping("/posting")
 	public String posting (HttpServletRequest request,Model model) throws Exception{
 		
 		postingService.excute(request,model);

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.petmily.customer.dao.PagingDAO;
 import com.petmily.customer.dao.PostingDAO;
 import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.PostingDTO;
@@ -18,6 +19,8 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Autowired
 	PostingDAO postingDAO;
+	@Autowired 
+	PagingDAO pagingDAO;
 	
 	@Override
 	public void excute(HttpServletRequest request, Model model) throws Exception {
@@ -60,17 +63,13 @@ public class PostingServiceImpl implements PostingService {
 			cPage = 1;
 		}
 		
-		query = "'%"+ query + "%'";
+		query = "%"+ query + "%";
 		
 		totalRows = postingDAO.postingListRow(pcategory);
 		PagingDTO dto = new PagingDTO(cPage, totalRows, pageLength);
-		System.out.println("totalRows : "+totalRows);
-		System.out.println("page : "+dto.getcPage()+"\ncurrentblcok : "+dto.getCurrentBlock());
-		System.out.println("EndPage : "+dto.getEndPage()+"\nEndRow : "+dto.getEndRow());
-		System.out.println("PageLength : "+dto.getPageLength()+"\nStartPage : "+dto.getStartPage());
-		System.out.println("StartRow : "+dto.getStartRow()+"\nTotalPages : "+dto.getTotalPages());
-		//PagingDTO dto =  postingDAO.postingListPaging(cPage, totalRows, pageLength);
-		List<PostingDTO> dtos = postingDAO.postingGetList(cPage, rowLength, pcategory, option, query);
+		int start = (cPage - 1) * rowLength;
+		System.out.println("start : " + start + "\n rowLength : "+rowLength);
+		List<PostingDTO> dtos = postingDAO.postingGetList(cPage, rowLength, pcategory, option, query,start);
 		
 		model.addAttribute("paging", dto);
 		model.addAttribute("postingList", dtos);

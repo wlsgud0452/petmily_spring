@@ -11,6 +11,6 @@ public interface PostingDAO {
 	
 	public PagingDTO postingListPaging(int cPage, int totalRows, int pageLength) throws Exception;
 	
-	public List<PostingDTO> postingGetList(int cPage, int rowLength, String pcategory, String option, String query) throws Exception;
+	public List<PostingDTO> postingGetList(int cPage, int rowLength, String pcategory, String option, String query,int start) throws Exception;
 	
 }
