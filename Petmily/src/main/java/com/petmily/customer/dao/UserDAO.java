@@ -11,4 +11,7 @@ public interface UserDAO {
 			String uaddress, String utype, String uimage) throws Exception;
 	
 	public int registerCheck(String uid) throws Exception;
+	
+	public UserDTO userInfo(String uid) throws Exception;
+	
 }

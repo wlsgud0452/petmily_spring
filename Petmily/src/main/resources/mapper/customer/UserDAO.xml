@@ -23,4 +23,8 @@
 	<select id="registerCheck" resultType="Integer">
 		select count(*) from user where uid = #{uid}
 	</select>
+	
+	<select id="userInfo" resultType="com.petmily.customer.dto.UserDTO">
+		select uname, uemail, uphone, uaddress, unickname, uimage from user where uid = #{uid}
+	</select>
 </mapper>
