@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 
 public interface MypageService {
 	
-	public int executeInt(HttpServletRequest request ,HttpSession session) throws Exception;
-	public void execute(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
-	public void executeTwo(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
-	public void executeThree(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
+	public int myPageModifyLogin(HttpServletRequest request ,HttpSession session) throws Exception;
+	public void myPageModifyUpdate(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
+	public void myPageChallenge(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
+	public void myPageApplyList(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
+	public void myPageApplyUpdate(HttpServletRequest request) throws Exception;
+	public void myPageApplyDelete(HttpServletRequest request) throws Exception;
 	
 }

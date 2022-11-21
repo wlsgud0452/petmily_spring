@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface SignupService {
-	public void execute(MultipartHttpServletRequest request, Model model , MultipartFile file) throws Exception;
-	public int executeTwo(HttpServletRequest request) throws Exception;
-	public String executeThree(HttpServletRequest request) throws Exception;
+	public void signup(MultipartHttpServletRequest request, Model model , MultipartFile file) throws Exception;
+	public int signupIdCheck(HttpServletRequest request) throws Exception;
+	public String psBreedsList(HttpServletRequest request) throws Exception;
+	public int sendEmail(HttpServletRequest request) throws Exception;
 }

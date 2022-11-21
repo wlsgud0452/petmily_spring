@@ -1,5 +1,8 @@
 package com.petmily.customer.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +12,10 @@ import org.springframework.ui.Model;
 
 import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.LecturecheckDAO;
+import com.petmily.customer.dao.ReviewDAO;
 import com.petmily.customer.dao.UserDAO;
+import com.petmily.customer.dto.ApplyDTO;
+import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.UserDTO;
 
 @Service
@@ -24,8 +30,11 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	ApplyDAO applyDAO;
 	
+	@Autowired
+	ReviewDAO reviewDAO;
+	
 	@Override
-	public int executeInt(HttpServletRequest request , HttpSession session) throws Exception {
+	public int myPageModifyLogin(HttpServletRequest request , HttpSession session) throws Exception {
 		UserDTO udto = (UserDTO) session.getAttribute("user");
 		String uid = udto.getUid();
 		
@@ -44,7 +53,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public void execute(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+	public void myPageModifyUpdate(HttpServletRequest request, Model model , HttpSession session) throws Exception {
 		UserDTO udto = (UserDTO)session.getAttribute("user");
 		String uid = udto.getUid();
 		
@@ -55,7 +64,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public void executeTwo(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+	public void myPageChallenge(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		UserDTO user = (UserDTO) session.getAttribute("user");
 		String uid = user.getUid();
@@ -182,9 +191,89 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public void executeThree(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
+	public void myPageApplyList(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		UserDTO udto = (UserDTO) session.getAttribute("user");
+		String uid = udto.getUid();
 		
+		int cPage = 0;
+		int pageLength = 5;
+		int totalRows = 0;
+		int rowLength=5;
+		
+		String tempPage = request.getParameter("page");
+		
+		if(tempPage == null || tempPage.length()==0) {
+			cPage = 1;
+		}
+		try {
+			cPage = Integer.parseInt(tempPage);
+		} catch (Exception e) {
+			cPage = 1;
+		}
+		
+		totalRows = applyDAO.applyListRow(uid);
+		PagingDTO dto = new PagingDTO(cPage, totalRows, pageLength);
+		int start = (cPage - 1) * rowLength;
+		List<ApplyDTO> dtos = applyDAO.applyGetList(rowLength, start ,uid );
+		List<UserDTO> udtos = new ArrayList<>();
+		int userRating = 0;
+		
+		// uid를 가지고 이제 uid 값들을 가져와야된다.
+		for(ApplyDTO list : dtos) {
+			String apply_uid = list.getUser_uid();
+			UserDTO udto2 = userDAO.userInfo(apply_uid);
+			userRating = reviewDAO.selectRating(apply_uid);
+			if(userRating == 0 ) {
+				// 아직 평점이 없을 경우는 그냥 5점 준다. 평균
+				userRating = 5;
+			}
+			udtos.add(udto2);
+		}
+		
+		model.addAttribute("paging", dto);
+		model.addAttribute("applyList", dtos);
+		model.addAttribute("applyUserInfoList", udtos);
+		model.addAttribute("userRating", userRating);
+		
+	}
+	
+	@Override
+	public void myPageApplyUpdate(HttpServletRequest request) throws Exception {
+		String index = request.getParameter("index");
+		String[] apidArr = request.getParameterValues("apid");
+		String[] pidArr = request.getParameterValues("pid");
+
+		// index로 어떤 apid에서 선택 된 것인지 알아오기
+		String apid = apidArr[Integer.parseInt(index)];
+		String pid = apidArr[Integer.parseInt(index)];
+
+		String columnname = "";
+
+		// 어떤 버튼 눌렀는지에 따라 업데이트 해줘야 하는 컬럼명이 다름
+		columnname = "apmatchingdate";
+		// 수락일 때
+
+		applyDAO.updateByApId(Integer.parseInt(apid), columnname);
+		applyDAO.updateByPId(Integer.parseInt(pid));
+	}
+	
+	@Override
+	public void myPageApplyDelete(HttpServletRequest request) throws Exception {
+		// TODO Auto-generated method stub
+		String index = request.getParameter("index");
+		String[] apidArr = request.getParameterValues("apid");
+		
+		// index로 어떤 apid에서 선택 된 것인지 알아오기
+		String apid = apidArr[Integer.parseInt(index)]; 
+		
+		String columnname = "";
+		
+		// 어떤 버튼 눌렀는지에 따라 업데이트 해줘야 하는 컬럼명이 다름
+		// 그냥 두개로 나누기로 함
+		columnname = "apcanceldate";
+		
+		// review table에 그거 업데이트
+		applyDAO.updateByApId(Integer.parseInt(apid),columnname);
 	}
 
 }
