@@ -29,11 +29,11 @@
 					data-bs-toggle="dropdown" aria-expanded="false"> 함께 </a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item"
-							href="posting?pcategory=volunteer">함께 봉사</a></li>
-						<li><a class="dropdown-item" href="posting?pcategory=walk">함께
+							href="posting?pcategory=volunteer&page=1">함께 봉사</a></li>
+						<li><a class="dropdown-item" href="posting?pcategory=walk&page=1">함께
 								산책</a></li>
 						<li><a class="dropdown-item"
-							href="posting?pcategory=petcafe">함께 펫카페</a></li>
+							href="posting?pcategory=petcafe&page=1">함께 펫카페</a></li>
 					</ul></li>
 
 				<li class="nav-item dropdown"><a
@@ -41,9 +41,9 @@
 					href="posting?pcategory=find" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false">구조 </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="posting?pcategory=find">찾아주세요</a></li>
+						<li><a class="dropdown-item" href="posting?pcategory=find&page=1">찾아주세요</a></li>
 						<li><a class="dropdown-item"
-							href="posting?pcategory=found">찾았어요</a></li>
+							href="posting?pcategory=found&page=1">찾았어요</a></li>
 					</ul></li>
 			</ul>
 

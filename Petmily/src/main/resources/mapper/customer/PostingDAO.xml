@@ -11,7 +11,7 @@
 	
 	<select id="postingGetList" resultType="com.petmily.customer.dto.PostingDTO">
 		select pid, ptitle, plocation, pinitdate, user_uid, pcategory from posting 
-		where pcategory = #{pcategory} and pdeletedate is null and #{option} 
+		where pcategory = #{pcategory} and pdeletedate is null and ${option} 
 		like #{query} order by pid desc limit #{start} ,#{rowLength}
 	</select>
 	

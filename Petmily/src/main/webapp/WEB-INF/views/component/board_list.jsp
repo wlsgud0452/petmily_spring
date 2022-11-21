@@ -151,16 +151,20 @@
 		</div>
 
 		<div class="row justify-content-center my-2">
-
 			<nav aria-label="Page navigation example ">
 				<ul class="pagination justify-content-center">
 					<c:set var="startPage" value="paging.startPage" />
 					<c:choose>
 
-						<c:when test="${paging.startPage eq '1'}">
+						<c:when test="${param.page eq '1'}">
 							<!-- if -->
 							<li class="page-item"><a class="page-link" href="#">Previous
 							</a></li>
+						</c:when>
+						
+						<c:when test="${param.page > paging.startPage}">
+							<!-- if -->
+							<li class="page-item"><a class="page-link" href="posting?page=${param.page - 1}&pcategory=${param.pcategory }">Previous </a></li>
 						</c:when>
 
 						<c:otherwise>
@@ -172,8 +176,7 @@
 
 					</c:choose>
 					<!-- int = startPage; i <= endPage; i++ -->
-					<c:forEach var="count" begin="${paging.startPage}"
-						end="${paging.endPage}">
+					<c:forEach var="count" begin="${paging.startPage}" end="${paging.endPage}">
 						<li class="page-item"><a class="page-link"
 							href="posting?page=${count}&pcategory=${param.pcategory }">${count}
 						</a></li>
@@ -181,17 +184,20 @@
 
 					<c:choose>
 
-						<c:when test="${paging.totalPages eq paging.endPage}">
+						<c:when test="${param.page eq paging.totalPages}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="#">> </a></li>
+							<li class="page-item"><a class="page-link" href="#">Next </a></li>
 						</c:when>
-
-						<c:otherwise>
-							<!-- else -->
-							<li class="page-item"><a class="page-link"
-								href="posting?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next
-							</a></li>
-						</c:otherwise>
+						
+						<c:when test="${param.page eq paging.endPage}">
+							<!-- if -->
+							<li class="page-item"><a class="page-link" href="posting?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next </a></li>
+						</c:when>
+						
+						<c:when test="${param.page < paging.endPage}">
+							<!-- if -->
+							<li class="page-item"><a class="page-link" href="posting?page=${param.page + 1}&pcategory=${param.pcategory }">Next </a></li>
+						</c:when>
 
 					</c:choose>
 				</ul>
