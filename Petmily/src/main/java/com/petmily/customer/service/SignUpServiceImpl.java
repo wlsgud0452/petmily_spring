@@ -43,7 +43,7 @@ public class SignUpServiceImpl implements SignupService {
 		// 파일 저장하는 방법 [S]
 		// 패스 지정
 		if (!(file == null)) {
-			String path = System.getProperty("user.dir") + "//src//main//resources//static//user";
+			String path = System.getProperty("user.dir") + "//src//main//resources//static//posting";
 
 			// 파일을 uid로 만들기 위한 기초단계
 			uid = request.getParameter("uid");

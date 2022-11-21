@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.PostingDTO;
 
 public class PostingDAOImpl implements PostingDAO{
@@ -26,6 +25,28 @@ public class PostingDAOImpl implements PostingDAO{
 		
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + ".postingGetList");
+	}
+
+
+	//포스팅의 텍스트 입력
+	@Override
+	public void postingInsertText(String ptitle, String pcategory, String pcontent, String plocation_basic,
+			String plocation_detail,String user_uid) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	//이 아이디의 마지막 모스팅 받아오기
+	@Override
+	public int postingGetId(String user_uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".postingGetId");
+	}
+
+
+	@Override
+	public void updateImages(String pimage1, String pimage2, String pimage3, int lastPostingId) throws Exception {
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -10,9 +10,25 @@
 	</select>
 	
 	<select id="postingGetList" resultType="com.petmily.customer.dto.PostingDTO">
-		select pid, ptitle, plocation, pinitdate, user_uid, pcategory from posting 
+		select pid, ptitle, plocation_basic, pinitdate, user_uid, pcategory from posting 
 		where pcategory = #{pcategory} and pdeletedate is null and ${option} 
 		like #{query} order by pid desc limit #{start} ,#{rowLength}
 	</select>
+	
+	<!-- 텍스트 입력 -->
+	
+	<insert id="postingInsertText">
+		insert into posting (ptitle, pcontent, pcategory, plocation_basic, plocation_detail, user_uid, plevel, pinitdate) 
+		values(#{ptitle}, #{pcontent}, #{pcategory}, #{plocation_basic}, #{plocation_detail}, #{user_uid}, '1', now());
+	</insert>
+	
+	<!-- 마지막 포스팅 가져오기 -->
+	<select id="postingGetId" resultType="Integer">
+		select pid from posting pid where user_uid = #{user_uid} order by pid desc limit 1
+	</select>
+	
+	<update id="updateImages">
+		update posting set pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3} where pid = #{lastPostingId}
+	</update>
 	
 </mapper>

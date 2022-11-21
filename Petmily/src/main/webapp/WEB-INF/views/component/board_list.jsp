@@ -115,7 +115,7 @@
 
 					<c:otherwise>
 						<button class="btn btn-warning" type="button"
-							onclick="changeForm()" style="display: none">작성</button>
+								style="display: none">작성</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -143,7 +143,7 @@
 								href="posting_click?pid=${list.pid }&user_uid=${list.user_uid}&pcategory=${list.pcategory}">${list.ptitle }</a></td>
 							<td>${list.user_uid }</td>
 							<td>${list.pinitdate }</td>
-							<td>${list.plocation }</td>
+							<td>${list.plocation_basic }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -175,12 +175,16 @@
 						</c:otherwise>
 
 					</c:choose>
+					
+					
 					<!-- int = startPage; i <= endPage; i++ -->
 					<c:forEach var="count" begin="${paging.startPage}" end="${paging.endPage}">
 						<li class="page-item"><a class="page-link"
 							href="posting?page=${count}&pcategory=${param.pcategory }">${count}
 						</a></li>
 					</c:forEach>
+
+
 
 					<c:choose>
 

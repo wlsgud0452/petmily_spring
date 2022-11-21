@@ -34,7 +34,15 @@
 
 						$("#pcategory").val(pcategory).attr("selected",
 								"selected");
-
+						
+						
+						$("#file").change(function(){
+							if($("#file")[0].files.length>4){
+								$("#file").val("");
+								alert("세개 까지만 가능해요");
+								
+							}
+						})
 										
 					});
 	
@@ -142,12 +150,12 @@
 			<div class="col-6 mb-3 gy-3">
 				<label for="exampleFormControlInput1" class="form-label">사진
 					업로드 </label>
-					<input type="file" class="form-control my-2" id="file1" name="file1"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*">
-						<input type="file" class="form-control my-2" id="file2" name="file2"
+					<input multiple="multiple" type="file" class="form-control my-2" id="file" name="file"
+						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" >
+						<!-- <input type="file" class="form-control my-2" id="file2" name="file2"
 						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*">
 						<input type="file" class="form-control my-2" id="file3" name="file3"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*">
+						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*"> -->
 					
 			</div>
 

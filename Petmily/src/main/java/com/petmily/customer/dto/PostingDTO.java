@@ -11,7 +11,8 @@ public class PostingDTO {
 	String pimage2;
 	String pimage3;
 	String pcategory;
-	String plocation;
+	String plocation_basic;
+	String plocation_detail;
 	int pulevel;
 	int plevel;
 	int pparentid;
@@ -24,38 +25,9 @@ public class PostingDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
- 	
-	public PostingDTO(String pcontent, Timestamp pinitdate, String user_uid,String pcatepgy) {
-		super();
-		this.pcontent = pcontent;
-		this.pinitdate = pinitdate;
-		this.user_uid = user_uid;
-		this.pcategory = pcatepgy;
-	}
-
-
-
-		// gukHwa [조회_게시판]
-		public PostingDTO(int pid, String ptitle, String pcontent, String pimage1,
-				String pimage2, String pimage3, String pcategory, String plocation, Timestamp pinitdate) {
-			super();
-			this.pid = pid;
-			this.ptitle = ptitle;
-			this.pcontent = pcontent;
-			this.pimage1 = pimage1;
-			this.pimage2 = pimage2;
-			this.pimage3 = pimage3;
-			this.pcategory = pcategory;
-			this.plocation = plocation;
-			this.pinitdate = pinitdate;
-		}
-		
-
-	
 	public PostingDTO(int pid, String ptitle, String pcontent, String pimage1, String pimage2, String pimage3,
-			String pcategory, String plocation, int pulevel, int plevel, int pparentid, Timestamp pinitdate,
-			Timestamp pupdatedate, Timestamp pdeletedate, String user_uid) {
+			String pcategory, String plocation_basic, String plocation_detail, int pulevel, int plevel, int pparentid,
+			Timestamp pinitdate, Timestamp pupdatedate, Timestamp pdeletedate, String user_uid) {
 		super();
 		this.pid = pid;
 		this.ptitle = ptitle;
@@ -64,7 +36,8 @@ public class PostingDTO {
 		this.pimage2 = pimage2;
 		this.pimage3 = pimage3;
 		this.pcategory = pcategory;
-		this.plocation = plocation;
+		this.plocation_basic = plocation_basic;
+		this.plocation_detail = plocation_detail;
 		this.pulevel = pulevel;
 		this.plevel = plevel;
 		this.pparentid = pparentid;
@@ -73,32 +46,6 @@ public class PostingDTO {
 		this.pdeletedate = pdeletedate;
 		this.user_uid = user_uid;
 	}
-
-	public PostingDTO(String ptitle, String pcontent, String pimage1, String pimage2, String pimage3, String plocation,
-			Timestamp pinitdate, String user_uid, String pcategory) {
-		super();
-		this.ptitle = ptitle;
-		this.pcontent = pcontent;
-		this.pimage1 = pimage1;
-		this.pimage2 = pimage2;
-		this.pimage3 = pimage3;
-		this.plocation = plocation;
-		this.pinitdate = pinitdate;
-		this.user_uid = user_uid;
-		this.pcategory = pcategory;
-	}
-
-	public PostingDTO(int pid, String ptitle, String plocation, Timestamp pinitdate, String user_uid, String pcategory) {
-		super();
-		this.pid = pid;
-		this.ptitle = ptitle;
-		this.plocation = plocation;
-		this.pinitdate = pinitdate;
-		this.user_uid = user_uid;
-		this.pcategory = pcategory;
-	}
-	
-	
 
 	public int getPid() {
 		return pid;
@@ -156,12 +103,20 @@ public class PostingDTO {
 		this.pcategory = pcategory;
 	}
 
-	public String getPlocation() {
-		return plocation;
+	public String getPlocation_basic() {
+		return plocation_basic;
 	}
 
-	public void setPlocation(String plocation) {
-		this.plocation = plocation;
+	public void setPlocation_basic(String plocation_basic) {
+		this.plocation_basic = plocation_basic;
+	}
+
+	public String getPlocation_detail() {
+		return plocation_detail;
+	}
+
+	public void setPlocation_detail(String plocation_detail) {
+		this.plocation_detail = plocation_detail;
 	}
 
 	public int getPulevel() {
@@ -221,5 +176,4 @@ public class PostingDTO {
 	}
 	
 	
-
 }
