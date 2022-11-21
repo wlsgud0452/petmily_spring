@@ -116,10 +116,7 @@ public class SignUpServiceImpl implements SignupService {
 			
 			// pstype 과 psbreeds로 맞는 psid list 가져오기
 			List<Integer> psidList = petspecDAO.selectPsId(pstype , psbreeds);
-			
-			System.out.println("petid : " + petIdList.size());
-			System.out.println("psid : " + psidList.size());
-			
+						
 			List<ChooseDTO> list3 = new ArrayList<>();
 			for(int i=0; i<petIdList.size() ;i++) {
 				ChooseDTO dto = new ChooseDTO(petIdList.get(i), psidList.get(i));
