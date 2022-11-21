@@ -18,7 +18,7 @@ public class HomeServiceImpl implements HomeService {
 	PetspecDAO petspecDAO;
 
 	@Override
-	public void execute(HttpServletRequest request, Model model) throws Exception{
+	public void homeSlideOne(HttpServletRequest request, Model model) throws Exception{
 		
 		String pstype = request.getParameter("pstype");
 		

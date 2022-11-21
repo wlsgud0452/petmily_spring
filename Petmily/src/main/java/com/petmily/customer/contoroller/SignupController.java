@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.petmily.customer.service.EmailService;
 import com.petmily.customer.service.SignupService;
 
 @Controller
@@ -20,8 +19,6 @@ public class SignupController {
 	@Autowired
 	SignupService service;
 	
-	@Autowired
-	EmailService emailService;
 	
 	@RequestMapping("/signup_page")
 	public String signup() {
@@ -37,7 +34,7 @@ public class SignupController {
 	@ResponseBody
 	public String signupIdCheck(HttpServletRequest request) throws Exception {
 
-		return service.executeTwo(request) + "";
+		return service.signupIdCheck(request) + "";
 
 	}
 	
@@ -45,7 +42,7 @@ public class SignupController {
 	@ResponseBody
 	public String emailCheck(HttpServletRequest request) throws Exception {
 
-		return emailService.sendEmail(request) + "";
+		return service.sendEmail(request) + "";
 
 	}
 	
@@ -53,14 +50,14 @@ public class SignupController {
 	@ResponseBody
 	public String psBreedsList(HttpServletRequest request) throws Exception {
 
-		return service.executeThree(request);
+		return service.psBreedsList(request);
 
 	}
 	
 	@RequestMapping("/sign_up")
 	public String signupClick(MultipartHttpServletRequest request, Model model, MultipartFile file) throws Exception {
 
-		service.execute(request, model, file);
+		service.signup(request, model, file);
 		
 		return "login";
 

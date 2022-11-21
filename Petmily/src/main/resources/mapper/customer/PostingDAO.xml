@@ -15,8 +15,6 @@
 		like #{query} order by pid desc limit #{start} ,#{rowLength}
 	</select>
 	
-	<!-- 텍스트 입력 -->
-	
 	<insert id="postingInsertText">
 		insert into posting (ptitle, pcontent, pcategory, plocation_basic, plocation_detail, user_uid, plevel, pinitdate) 
 		values(#{ptitle}, #{pcontent}, #{pcategory}, #{plocation_basic}, #{plocation_detail}, #{user_uid}, '1', now());
@@ -30,5 +28,13 @@
 	<update id="updateImages">
 		update posting set pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3} where pid = #{lastPostingId}
 	</update>
+	
+	<select id="acceptPostingList" resultType="com.petmily.customer.dto.PostingDTO">
+		select p.pid , p.user_uid , p.pcategory , p.ptitle , p.pinitdate , p.plocation
+		from posting p inner join apply a
+		where p.pid = a.posting_pid and a.user_uid = #{uid} 
+		and a.apcanceldate is null and a.apmatchingdate is not null and a.apcompletedate is null
+		order by a.apmatchingdate limit #{start}, #{rowLength}
+	</select>
 	
 </mapper>

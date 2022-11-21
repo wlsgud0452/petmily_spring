@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService{
 	UserDAO userDAO;
 	
 	@Override
-	public UserDTO executeDTO(HttpServletRequest request, Model model) throws Exception {
+	public UserDTO login(HttpServletRequest request, Model model) throws Exception {
 		
 		String uid = request.getParameter("uid");
 		String upw = request.getParameter("upw");

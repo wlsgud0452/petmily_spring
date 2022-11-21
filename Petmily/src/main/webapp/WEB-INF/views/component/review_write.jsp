@@ -39,27 +39,29 @@
 }
 </style>
 
-	<script type="text/javascript">
-		function succes(){
-			var form = document.reviewStar;
+<script type="text/javascript">
+	function success(){
+		var form = document.reviewInsert;
 
-			form.submit();
+		form.submit();
 
-		}
-	</script>
-	
+	}
+</script>
+
 	<div class="container" >
 		<div class="row justify-content-center">
 			<div class="text-center gy-3">
-			<img class="rounded-circle" src="component/images/profile_dog.png" width="210px" height="210px">
+			<img class="rounded-circle" src="user/${to_uimage}" width="210px" height="210px">
 			</div>
 		</div>
 		<div class="text-center ">
-			<label style="font-size: 30px;"><strong><label style="color: #e8853e;">스마일맨</label>님과의 만남이 즐거우셨나요?</strong></label>
+			<label style="font-size: 30px;">
+			<strong>
+			<label style="color: #e8853e;">${posting_pid }</label> 님과의 만남이 즐거우셨나요?</strong></label>
 		</div>
 
 		<div class="text-center">
-			<form class="mb-3" name="reviewStar" action="test" id="myform" method="get">
+			<form class="mb-3" name="reviewInsert" action="review_insert" id="myform" method="post">
 				<fieldset>
 					<input type="radio" name="reviewStar" value="5" id="rate1"><label
 						for="rate1">★</label>
@@ -71,7 +73,9 @@
 						for="rate4">★</label>
 					<input type="radio" name="reviewStar" value="1" id="rate5"><label
 						for="rate5">★</label>
-				</fieldset><br>
+				</fieldset>
+				
+				<br>
 			
 				<div>
 					<label style="font-size: 20px; color: black;">의견을 자유롭게 적어 주세요!!</label>
@@ -85,9 +89,12 @@
 						</div>
 					</div>
 				</div>
-			</form>
+				<!-- database 저장 시 필요한 hidden -->
+				<input type="hidden" name="to_uid" value="${to_uid }">
+				<input type="hidden" name="posting_pid" value="${posting_pid }">
 				<div>
-					<button class="btn" style="background-color: #e8853e; color: white;" onclick="succes()">완료</button>
+					<button class="btn" style="background-color: #e8853e; color: white;" onclick="success()">완료</button>
 				</div>
+			</form>
 		</div>
 	</div>

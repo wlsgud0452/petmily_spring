@@ -18,7 +18,7 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, Model model) throws Exception{
 		
-		service.execute(request, model);
+		service.homeSlideOne(request, model);
 		
 		return "home";
 	}
@@ -26,7 +26,7 @@ public class IndexController {
 	@RequestMapping("/home")
 	public String home(HttpServletRequest request, Model model) throws Exception{
 		
-		service.execute(request, model);
+		service.homeSlideOne(request, model);
 		
 		return "redirect:";
 	}

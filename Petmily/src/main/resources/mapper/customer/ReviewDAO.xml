@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.ReviewDAO">
+	
+	<select id="selectRating" resultType="Integer">
+		select sum(revrating) from review where to_uid = #{uid} group by to_uid
+	</select>
+	
+	<insert id="insert">
+		insert into review (revtext, revrating, from_uid, posting_pid, to_uid)
+		values
+		(#{revtext},#{revrating}, #{from_uid}, #{posting_pid}, #{to_uid})
+	</insert>
+	
+</mapper>

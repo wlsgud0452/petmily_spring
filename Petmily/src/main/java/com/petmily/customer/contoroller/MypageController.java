@@ -29,7 +29,7 @@ public class MypageController {
 	@RequestMapping("/mypage_modify_login")
 	public String myPageModifyLogin(HttpServletRequest request) throws Exception {
 		session = request.getSession();
-		int result = service.executeInt(request , session);
+		int result = service.myPageModifyLogin(request , session);
 		
 		if(result == 1) {
 			return "redirect:mypage_modify_update";
@@ -43,7 +43,7 @@ public class MypageController {
 	public String myPageModifyUdate(HttpServletRequest request , Model model) throws Exception {
 		session = request.getSession();
 		
-		service.execute(request, model , session);
+		service.myPageModifyUpdate(request, model , session);
 		
 		return "mypage_modify";
 	}
@@ -52,7 +52,7 @@ public class MypageController {
 	public String myPageChallenge(HttpServletRequest request, Model model) throws Exception {
 		session = request.getSession();
 		
-		service.executeTwo(request, model, session);
+		service.myPageChallenge(request, model, session);
 		
 		return "mypage_challenge";
 	}
@@ -61,9 +61,48 @@ public class MypageController {
 	public String myPageApplyList(HttpServletRequest request, Model model) throws Exception {
 		session = request.getSession();
 		
-		service.executeThree(request, model, session);
+		service.myPageApplyList(request, model, session);
 		
 		return "mypage_apply_list";
+	}
+	
+	@RequestMapping("/apply_update")
+	public String myPageApplyUpdate(HttpServletRequest request) throws Exception {
+		service.myPageApplyUpdate(request);
+		
+		return "redirect:mypage_apply_list";
+	}
+	
+	@RequestMapping("/apply_delete")
+	public String myPageApplyDelete(HttpServletRequest request) throws Exception {
+		service.myPageApplyDelete(request);
+		
+		return "redirect:mypage_apply_list";
+	}
+	
+	@RequestMapping("/mypage_accept_list")
+	public String myPageAcceptList(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageAcceptList(request, model, session);
+		
+		return "mypage_accept_list";
+	}
+	
+	@RequestMapping("/mypage_accept_complete")
+	public String myPageAcceptComplete(HttpServletRequest request, Model model) throws Exception {
+		service.myPageAcceptComplete(request, model);
+		
+		return "mypage_review";
+	}
+	
+	@RequestMapping("/review_insert")
+	public String myPageReviewInsert(HttpServletRequest request, HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageReviewInsert(request, session);
+		
+		return "redirect:mypage_accept_list";
 	}
 	
 }
