@@ -17,6 +17,12 @@ public class PetspecDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public PetspecDTO(String pstype ,String psbreeds ) {
+		super();
+		this.pstype = pstype;
+		this.psbreeds = psbreeds;
+	}
+	
 	// gukHwa [조회_pet 설명_종류별(dog,cat,etc)card view 4개씩]
 	public PetspecDTO(String psbreeds, String psimage, String pscontent) {
 		super();

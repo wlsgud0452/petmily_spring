@@ -2,11 +2,13 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-						
+
 <mapper namespace="com.petmily.customer.dao.PetspecDAO">
-	
-	<select id="petSpecListFour" resultType="com.petmily.customer.dto.PetspecDTO">
-		select psbreeds , psimage , pscontent from petspec where pstype = #{pstype} limit 4
+
+	<select id="petSpecListFour"
+		resultType="com.petmily.customer.dto.PetspecDTO">
+		select psbreeds , psimage , pscontent from petspec where
+		pstype = #{pstype} limit 4
 	</select>
 	
 	<select id="petSpecList" resultType="com.petmily.customer.dto.PetspecDTO">
@@ -17,4 +19,25 @@
 		select pscontent from petspec where psbreeds = #{psbreeds}
 	</select>
 	
+	<select id="selectPsId" resultType="Integer"
+		parameterType="java.util.List">
+		select psid from petspec where pstype
+		in
+		<foreach collection="pstype" item="type" open="("
+			separator=" , " close=")">
+			#{type}
+		</foreach>
+		and psbreeds in
+		<foreach collection="psbreeds" item="breeds" open="("
+			separator=" , " close=")">
+			#{breeds}
+		</foreach>
+	</select>
+
+	<select id="psbreedsList" resultType="String">
+		select psbreeds from
+		petspec where pstype = #{pstype}
+	</select>
+
+
 </mapper>

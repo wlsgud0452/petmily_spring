@@ -7,10 +7,21 @@ public class PetDTO {
 	int petid;
 	Timestamp petbirthday;
 	String petgender;
+	String petname;
 	
 	public PetDTO() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	public PetDTO(String petname, String petgender) {
+		super();
+		this.petgender = petgender;
+		this.petname = petname;
+	}
+
+
 
 	public PetDTO(int petid, Timestamp petbirthday, String petgender) {
 		super();

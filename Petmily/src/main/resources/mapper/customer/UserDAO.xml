@@ -13,5 +13,14 @@
 		select count(*), uid , uname, utype, uimage from user where uid = #{uid} and upw = #{upw}
 	</select>
 	
+	<insert id="insert">
+		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress, utype, uimage , uinitdate) 
+		values 
+		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress} , #{utype} ,#{uimage} , now())
+	</insert>
 	
+	
+	<select id="registerCheck" resultType="Integer">
+		select count(*) from user where uid = #{uid}
+	</select>
 </mapper>

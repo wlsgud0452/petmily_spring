@@ -4,7 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
+import com.petmily.customer.dto.UserDTO;
+
 public interface LoginService {
-	public void execute(HttpServletRequest request, Model model) throws Exception;
-	public int executeInt(HttpServletRequest request, Model model) throws Exception;
+	public UserDTO executeDTO(HttpServletRequest request, Model model) throws Exception;
 }

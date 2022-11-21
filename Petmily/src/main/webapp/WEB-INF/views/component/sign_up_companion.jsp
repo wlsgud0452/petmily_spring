@@ -29,7 +29,7 @@
         else
         {
             $.ajax({
-               url:'http://localhost:8080/PetmilyCustomer/PsbreedsList',
+               url:'psbreeds_list',
                type:'GET',
                data:'pstype='+pstype,
                success:function(response)
@@ -55,6 +55,7 @@
        $('#register').click(function(){
     	 	var pstype = $('#pstype').val();
     	 	var psbreeds = $('#psbreeds').val();
+    	  	console.log(psbreeds);
     	 	var petname = $('#petname').val();
     	 	var petgender = $('input[name="petgender"]:checked').val();
     	   	

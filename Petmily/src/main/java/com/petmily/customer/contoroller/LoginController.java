@@ -1,12 +1,14 @@
 package com.petmily.customer.contoroller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.petmily.customer.dto.UserDTO;
 import com.petmily.customer.service.LoginService;
 
 @Controller
@@ -14,6 +16,8 @@ public class LoginController {
 
 	@Autowired
 	LoginService service;
+	
+	HttpSession session;
 
 	@RequestMapping("/login_page")
 	public String loginPage() throws Exception {
@@ -22,19 +26,22 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) throws Exception {
-		int result = service.executeInt(request, model);
-
-		if (result == 0) {
-			return "redirect:home";
-		} else {
+		UserDTO dto = service.executeDTO(request, model);
+		
+		if (dto == null) {
 			return "login";
+		} else {
+			session = request.getSession();
+			session.setAttribute("user", dto);
+			return "redirect:home";
 		}
 
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, Model model) throws Exception {
-		service.execute(request, model);
+		session = request.getSession();
+		session.invalidate();
 		
 		return "redirect:home";
 	}

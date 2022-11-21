@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.petmily.customer.dao.PetDAO">
+
+	<insert id="insert" parameterType="java.util.List">
+		insert into pet (petname , petgender ,user_uid , petinitdate) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.petname} , #{item.petgender} ,#{uid} , now() )
+		</foreach>
+	</insert>
+
+	<select id="selectPetId" resultType="Integer">
+		select petid from pet where 
+		user_uid = #{uid}
+	</select>
+
+</mapper>

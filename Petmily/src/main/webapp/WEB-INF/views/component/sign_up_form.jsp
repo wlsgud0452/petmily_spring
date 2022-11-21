@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <script>
 		
 	$(document).ready(function() {
@@ -71,7 +70,7 @@
 			    	   alert('이메일 전송중입니다.이메일 전송 완료 알람이 뜰 떄까지 기다려주세요.');
 			    	   
 			           $.ajax({
-			              url:'http://localhost:8080/PetmilyCustomer/Email2',
+			              url:'email',
 			              type:'POST',
 			              data:{uemail : uemail},
 			              success:function(response)
@@ -247,11 +246,10 @@
 		
 		$.ajax({
 			type : 'POST',
-			url : 'http://localhost:8080/PetmilyCustomer/SignupidCheck',
+			url : 'sign_up_id_check',
 			data : {uid , uid},
 			success:function(result){
-				
-				if(result == 1){
+				if(result == 0){
 					$("label[for='id_overlap_status']").text("사용가능한 아이디 입니다.");
 					$("label[for='id_overlap_status']").css("color","blue");
 					$('#id_overlap_check').attr('value','available');
@@ -342,7 +340,7 @@
 				<label for="uid_regexp" class="form-label" style="color: #a3a3a3; padding-left : 2rem;">영문자로 시작하는 영문자 또는 숫자 6 ~ 20자 </label>
 				 <input
 					type="text" class="form-control" name="uid" id="uid"
-					placeholder="아이디를 입력해 주세요"> <label for="id_overlap_status"
+					placeholder="아이디를 입력해 주세요"> <label for="id_overlap_status" 
 					class="form-label"> </label>
 			</div>
 			<button class="btn btn-warning col-1 gy-2 align-self-center"
@@ -482,7 +480,7 @@
 					autocomplete="off" value="companion"> <label
 					class="btn mb-3 gy-2" for="type1"
 					style="box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); width: 100%;">
-					<img src="component/images/companion.png"
+					<img src="component/companion.png"
 					style="width: 6rem; height: 6rem; margin-bottom: 1rem; margin-top: 1rem;">
 					<h4>반려인</h4>
 				</label>
@@ -492,7 +490,7 @@
 					autocomplete="off" value="unaccompanion" checked> <label
 					class="btn mb-3 gy-2" for="type2"
 					style="box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); width: 100%;">
-					<img src="component/images/becompanion.png"
+					<img src="component/becompanion.png"
 					style="width: 6rem; height: 6rem; margin-bottom: 1rem; margin-top: 1rem;">
 					<h4>비반려인</h4>
 				</label>
