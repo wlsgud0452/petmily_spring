@@ -28,6 +28,8 @@ $(document).ready(function(){
 <div class="container">
 	<div class="row justify-content-center my-4 text-center">
 		<h4>${postingDetail.ptitle}</h4>
+		<label>${applyStatus}url을 확인해 주세요</label>
+		
 	</div>
 
 	<div class="row justify-content-between my-2">
@@ -109,7 +111,7 @@ $(document).ready(function(){
 	<div class="row justify-content-between">
 		<div class="col-4 text-start">
 			<i class="bi bi-geo-alt" style="font-size: 1.7rem;"></i> <span
-				class="mx-2">${postingDetail.plocation}</span>
+				class="mx-2">${postingDetail.plocation_basic} ${postingDetail.plocation_detail}</span>
 		</div>
 
 
@@ -117,14 +119,14 @@ $(document).ready(function(){
 	</div>
 
 	<!-- img -->
-	<c:if test="${not empty postingDetail.pimage3}">
+	<c:if test="${not empty postingDetail.pimage1}">
 		<div class="row justify-content-center text-center my-5">
 			<div class="col-8">
-				<img src="posting/${postingDetail.pimage3}" class="rounded my-1"
+				<img src="posting/${postingDetail.pimage1}" class="rounded my-1"
 					alt="" style="width: 500px;"> <img
 					src="posting/${postingDetail.pimage2}" class="rounded my-1" alt=""
 					style="width: 500px;"> <img
-					src="posting/${postingDetail.pimage1}" class="rounded my-1" alt=""
+					src="posting/${postingDetail.pimage3}" class="rounded my-1" alt=""
 					style="width: 500px;">
 			</div>
 		</div>
@@ -165,7 +167,7 @@ $(document).ready(function(){
 	<!-- 댓글 -->
 	<!-- parent id가 pid인 걸 가져와서 댓글 쓴 사람의 아이디를 가지고 이미지를 불러오고 -->
 	<!-- 그거의 댓글과 날짜를 보여주면 된다. -->
-	<c:forEach var="comment" items="${commentList }" varStatus="status">
+	<%-- <c:forEach var="comment" items="${commentList }" varStatus="status">
 		<div class="row justify-content-center my-3">
 			<div class="col-1 align-self-center">
 				<c:choose>
@@ -191,7 +193,7 @@ $(document).ready(function(){
 				<h6>${comment.pinitdate }</h6>
 			</div>
 		</div>
-	</c:forEach>
+	</c:forEach> --%>
 
 	<form action="posting_reply_insert" method="get" id="reply">
 		<div class="row justify-content-center my-5">

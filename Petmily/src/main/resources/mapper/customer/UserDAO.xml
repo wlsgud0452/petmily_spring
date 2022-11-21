@@ -27,4 +27,8 @@
 	<select id="userInfo" resultType="com.petmily.customer.dto.UserDTO">
 		select uname, uemail, uphone, uaddress, unickname, uimage from user where uid = #{uid}
 	</select>
+	
+	<select id="selectImage" resultType="String">
+		select uimage from user where uid = #{postingUid}
+	</select>
 </mapper>

@@ -49,4 +49,18 @@ public class PostingDAOImpl implements PostingDAO{
 		// TODO Auto-generated method stub
 	}
 
+
+	@Override
+	public PostingDTO postingGetDetail(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".postingGetDetail");
+	}
+
+
+	@Override
+	public List<PostingDTO> selectCommentList(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".selectCommentList");
+	}
+
 }

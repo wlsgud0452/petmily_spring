@@ -17,4 +17,8 @@ public interface PostingDAO {
 	public int postingGetId(String user_uid) throws Exception;
 	
 	public void updateImages(String pimage1, String pimage2, String pimage3, int lastPostingId) throws Exception;
+	
+	public PostingDTO postingGetDetail(int pid) throws Exception;
+	
+	public List<PostingDTO> selectCommentList (int pid) throws Exception;
 }

@@ -14,4 +14,16 @@ public class ApplyDAOImpl implements ApplyDAO {
 		return sqlSession.selectOne(nameSpace + ".selectCategory");
 	}
 
+	@Override
+	public int applyUserCount(String user_uid, int posting_pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace+ ".applyUserCount");
+	}
+
+	@Override
+	public void postingApplyInsert(String user_uid, int posting_pid, String posting_user_uid, String aptitle, String apcontent) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
