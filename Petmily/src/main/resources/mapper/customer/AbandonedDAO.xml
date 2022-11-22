@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.AbandonedDAO">
+	
+	<resultMap type="hashMap" id="abandonedMap">
+		<result column="x" property="x"></result>
+		<result column="y" property="y"></result>
+	</resultMap>
+	
+	<select id="chart" resultMap="abandonedMap">
+		select year as x , total as y from abandoned
+	</select>
+	
+	<resultMap type="hashMap" id="ratioMap">
+		<result column="x" property="x"></result>
+		<result column="y" property="y"></result>
+	</resultMap>
+	
+	<select id="ratio" resultMap="ratioMap">
+		select a.year as x, (e.dog + e.cat + e.etc ) * 100 / a.total as y from euthanasia e inner join abandoned a on 
+		a.year = e.year
+	</select>
+	
+</mapper>
+						

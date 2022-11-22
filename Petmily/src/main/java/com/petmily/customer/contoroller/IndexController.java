@@ -19,7 +19,9 @@ public class IndexController {
 	@RequestMapping("/")
 	public String index(HttpServletRequest request, Model model ) throws Exception{
 		
-		service.homeSlideOne(request, model );
+		service.homeSlideOne(request, model);
+		service.homeSlideTwo(request, model);
+		service.homeSlideThree(request, model);
 		
 		return "home";
 	}
@@ -28,9 +30,13 @@ public class IndexController {
 	public String home(HttpServletRequest request, Model model  ) throws Exception{
 		
 		service.homeSlideOne(request, model);
+		service.homeSlideTwo(request, model);
+		service.homeSlideThree(request, model);
 		
 		return "home";
 	}
+	
+	
 	
 	
 }

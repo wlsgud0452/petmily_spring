@@ -81,6 +81,8 @@
 							<td>${list.user_uid }</td>
 							<td>${list.pinitdate }</td>
 							<td>${list.plocation_basic }</td>
+							<td>${likeList.get(status.index) }</td>
+							<td>${showList.get(status.index) }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

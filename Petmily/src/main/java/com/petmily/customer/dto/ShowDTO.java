@@ -14,6 +14,8 @@ public class ShowDTO {
 	public ShowDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+
 
 	public ShowDTO(int shid, Timestamp shdate, int shlike, String user_uid, int posting_pid) {
 		super();

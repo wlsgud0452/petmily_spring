@@ -482,13 +482,20 @@ public class MypageServiceImpl implements MypageService {
 		
 		List<PostingDTO> dtos = postingDAO.postingMypageWriteList(start, rowLength, uid, option, pcategory, query);
 		
-//		List<ShowDTO> showDTO = new ArrayList<>();
-//		for(PostingDTO pdto : dtos) {
-//			int pid = pdto.getPid();
-//			int show = showDAO.
-//			
-//		}
+		List<Integer> showList = new ArrayList<>();
+		List<Integer> likeList = new ArrayList<>();
+		for(PostingDTO pdto : dtos) {
+			int pid = pdto.getPid();
+			int like = showDAO.showLikeAllCount(pid);
+			int show = showDAO.showViewAllCount(pid);
+			
+			showList.add(show);
+			likeList.add(like);
+			
+		}
 		
+		model.addAttribute("showList", showList);
+		model.addAttribute("likeList", likeList);		
 		model.addAttribute("paging", dto);
 		model.addAttribute("postingList", dtos);
 		

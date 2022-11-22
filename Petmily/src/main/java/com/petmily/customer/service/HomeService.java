@@ -7,4 +7,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface HomeService {
 	public void homeSlideOne(HttpServletRequest request, Model model ) throws Exception;
+	
+	public void homeSlideTwo(HttpServletRequest request, Model model ) throws Exception;
+	
+	public void homeSlideThree(HttpServletRequest request, Model model ) throws Exception;
+
 }

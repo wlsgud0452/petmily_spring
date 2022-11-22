@@ -28,5 +28,14 @@
 	<update id="showInsetLike">
 		update showing set shlike = #{likeCheck} where posting_pid = #{pid} and user_uid = #{user_uid}
 	</update>
-
+	
+	<resultMap type="hashMap" id="showMap">
+		<result column="x" property="x"></result>
+		<result column="y" property="y"></result>
+	</resultMap>
+	
+	<select id="selectViewChart" resultMap="showMap">
+		select posting_pid as x ,count(posting_pid) as y from showing group by posting_pid
+	</select>
+	
 </mapper>
