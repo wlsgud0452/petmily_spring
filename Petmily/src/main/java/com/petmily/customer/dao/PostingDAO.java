@@ -32,4 +32,7 @@ public interface PostingDAO {
 	public int postingWriteListRow(String uid , String pcategory) throws Exception;
 	
 	public List<PostingDTO> postingMypageWriteList(int start,int rowLength,String uid,String option,String pcategory, String query) throws Exception;
+
+	public List<String> postingGetUid(int pid) throws Exception;
+
 }

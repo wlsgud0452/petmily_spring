@@ -56,9 +56,4 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSession.selectOne(nameSpace + ".selectImage");
 	}
 
-	@Override
-	public List<String> selectImageList(List<PostingDTO> commentList) throws Exception {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace + ".selectImageList");
-	}
 }

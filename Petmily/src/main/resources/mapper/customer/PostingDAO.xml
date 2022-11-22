@@ -59,6 +59,7 @@
 		update posting set pdeletedate = now() where pid = #{pid}
 	</update>
 	
+
 	<select id="postingWriteListRow" resultType="Integer">
 		select count(*) from posting where pdeletedate is null and user_uid = #{uid} and pcategory = #{pcategory}
 	</select>
@@ -68,5 +69,10 @@
 		where pcategory = #{pcategory} and pdeletedate is null and ${option} like CONCAT('%',#{query},'%') and user_uid = #{uid} 
 		order by pid desc limit #{start} , #{rowLength}
 	</select>
+
+	<select id="postingGetUid" resultType="String">
+		select user_uid from posting where pparentid = #{pid} order by pinitdate desc
+	</select>
+	
 	
 </mapper>

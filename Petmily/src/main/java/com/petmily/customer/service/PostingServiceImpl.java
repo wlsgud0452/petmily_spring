@@ -1,6 +1,7 @@
 package com.petmily.customer.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -199,9 +200,16 @@ public class PostingServiceImpl implements PostingService {
 		// pcontent , pinitdate , user_uid 가져오기
 		List<PostingDTO> commentList = postingDAO.selectCommentList(pid);
 		
-//		System.out.println(commentList.size());
+		List<String> commenttUid = postingDAO.postingGetUid(pid);
 		
-//		List<String> commentImageList = userDAO.selectImageList(commentList);
+		List<String> commentImageList = new ArrayList<>();
+		
+		for(String uid : commenttUid) {
+			String uimg = userDAO.selectUimage(uid);
+			commentImageList.add(uimg);
+		}
+		
+		
 		
 		model.addAttribute("user_uid", user_uid);
 		model.addAttribute("pid", pid);
@@ -212,7 +220,7 @@ public class PostingServiceImpl implements PostingService {
 		model.addAttribute("postingUid", postingUid);
 		model.addAttribute("postingUimage", uimage);
 		model.addAttribute("commentList", commentList);
-//		model.addAttribute("commentImageList", commentImageList);
+		model.addAttribute("commentImageList", commentImageList);
 	}
 	
 	@Override

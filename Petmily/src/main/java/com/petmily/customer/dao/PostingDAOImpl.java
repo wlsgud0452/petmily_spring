@@ -107,4 +107,11 @@ public class PostingDAOImpl implements PostingDAO{
 		return sqlSession.selectList(nameSpace + ".postingMypageWriteList") ;
 	}
 
+
+	@Override
+	public List<String> postingGetUid(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".postingGetUid");
+	}
+
 }
