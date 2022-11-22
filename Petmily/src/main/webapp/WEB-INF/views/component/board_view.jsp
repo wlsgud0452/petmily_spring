@@ -166,7 +166,7 @@ $(document).ready(function(){
 	<!-- 댓글 -->
 	<!-- parent id가 pid인 걸 가져와서 댓글 쓴 사람의 아이디를 가지고 이미지를 불러오고 -->
 	<!-- 그거의 댓글과 날짜를 보여주면 된다. -->
-	<%-- <c:forEach var="comment" items="${commentList }" varStatus="status">
+	<c:forEach var="comment" items="${commentList }" varStatus="status">
 		<div class="row justify-content-center my-3">
 			<div class="col-1 align-self-center">
 				<c:choose>
@@ -192,7 +192,7 @@ $(document).ready(function(){
 				<h6>${comment.pinitdate }</h6>
 			</div>
 		</div>
-	</c:forEach> --%>
+	</c:forEach>
 
 	<form action="posting_reply_insert" method="post" id="reply">
 		<div class="row justify-content-center my-5">

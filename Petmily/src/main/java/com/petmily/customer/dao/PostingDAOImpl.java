@@ -94,4 +94,11 @@ public class PostingDAOImpl implements PostingDAO{
 		sqlSession.update(nameSpace + ".postingDelete");
 	}
 
+
+	@Override
+	public List<String> postingGetUid(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".postingGetUid");
+	}
+
 }

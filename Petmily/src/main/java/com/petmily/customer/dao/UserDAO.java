@@ -21,7 +21,4 @@ public interface UserDAO {
 
 	public String selectImage(String postingUid) throws Exception;
 
-	
-	public List<String> selectImageList (List<PostingDTO> commentList) throws Exception;
-	
 }

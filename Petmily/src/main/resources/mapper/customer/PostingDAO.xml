@@ -59,5 +59,9 @@
 		update posting set pdeletedate = now() where pid = #{pid}
 	</update>
 	
+	<select id="postingGetUid" resultType="String">
+		select user_uid from posting where pparentid = #{pid} order by pinitdate desc
+	</select>
+	
 	
 </mapper>

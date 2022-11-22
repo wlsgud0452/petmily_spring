@@ -35,15 +35,5 @@
 		select uimage from user where uid = #{postingUid}
 	</select>
 	
-	<select id="selectImageList" resultType="java.util.List" parameterType="com.petmily.customer.dto.PostingDTO">
-	
-		select uimage from user where uid in
-		<foreach collection="commentList" item="list" open="("
-				separator=" , " close=")" >
-			'#{list.user_uid}'
-		</foreach>
-	
-	</select>
-	
 	
 </mapper>

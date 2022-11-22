@@ -28,4 +28,6 @@ public interface PostingDAO {
 	public PostingDTO postingInfo(int posting_pid) throws Exception;
 	
 	public void postingDelete(int pid) throws Exception;
+	
+	public List<String> postingGetUid(int pid) throws Exception;
 }
