@@ -1,7 +1,10 @@
 package com.petmily.customer.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.petmily.customer.dto.PostingDTO;
 import com.petmily.customer.dto.UserDTO;
 
 public class UserDAOImpl implements UserDAO {
@@ -45,5 +48,11 @@ public class UserDAOImpl implements UserDAO {
 	public String selectImage(String postingUid) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".selectImage");
+	}
+
+	@Override
+	public List<String> selectImageList(List<PostingDTO> commentList) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".selectImageList");
 	}
 }

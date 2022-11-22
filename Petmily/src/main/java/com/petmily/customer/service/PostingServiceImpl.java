@@ -185,9 +185,9 @@ public class PostingServiceImpl implements PostingService {
 		// pcontent , pinitdate , user_uid 가져오기
 		List<PostingDTO> commentList = postingDAO.selectCommentList(pid);
 		
+//		System.out.println(commentList.size());
 		
-		
-		//ArrayList<String> commentImageList = udao.selectImageList();
+//		List<String> commentImageList = userDAO.selectImageList(commentList);
 		
 		model.addAttribute("user_uid", user_uid);
 		model.addAttribute("pid", pid);
@@ -198,7 +198,7 @@ public class PostingServiceImpl implements PostingService {
 		model.addAttribute("postingUid", postingUid);
 		model.addAttribute("postingUimage", uimage);
 		model.addAttribute("commentList", commentList);
-		//request.setAttribute("commentImageList", commentImageList);
+//		model.addAttribute("commentImageList", commentImageList);
 	}
 
 	@Override
@@ -223,13 +223,91 @@ public class PostingServiceImpl implements PostingService {
 		
 		if ( count == 0) {
 			applyDAO.postingApplyInsert(user_uid, posting_pid, posting_user_uid, aptitle, apcontent);
-			redirectAttributes.addAttribute("applyStatus", "신청이 완료되었습니다.");
+			redirectAttributes.addFlashAttribute("applyStatus", "신청이 완료되었습니다.");
 			
 		}
 		
 		if(count == 1){
-			redirectAttributes.addAttribute("applyStatus", "이미 신청한 내역이 있습니다.<br>신청은 한 번만 가능합니다.");			
+			redirectAttributes.addFlashAttribute("applyStatus", "이미 신청한 내역이 있습니다.<br>신청은 한 번만 가능합니다.");
 		}
-		redirectAttributes.addAttribute("pid",posting_pid);
+		redirectAttributes.addFlashAttribute("pid",posting_pid);
+	}
+
+	@Override
+	public void postingLikeClick(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		// TODO Auto-generated method stub
+		
+		UserDTO udto = (UserDTO)session.getAttribute("user");
+		
+		String user_uid = udto.getUid();
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		int likeCheck = Integer.parseInt(request.getParameter("likeCheck"));
+		int postingLike = showDAO.showLikeAllCount(pid);
+		
+		
+		if(likeCheck == 1) {
+			likeCheck = 0;
+			showDAO.showInsetLike(pid, user_uid, likeCheck);
+		}else {
+			likeCheck = 1;
+			showDAO.showInsetLike(pid, user_uid, likeCheck);
+		}
+		
+		redirectAttributes.addAttribute("likeCheck", likeCheck);
+		redirectAttributes.addAttribute("postingLike", postingLike);
+		redirectAttributes.addAttribute("pid", pid);
+		
+	}
+
+	@Override
+	public void postingReplyInsert(HttpServletRequest request, Model model, HttpSession session,
+			RedirectAttributes redirectAttributes) throws Exception {
+		// TODO Auto-generated method stub
+		
+		UserDTO udto = (UserDTO)session.getAttribute("user");
+		
+		
+		String user_uid = udto.getUid();
+		String pid = request.getParameter("pid");
+		String ureply = request.getParameter("ureply");
+		int plevel = 2;//댓글
+		
+		postingDAO.postingRyplyWriteAction(pid, ureply, plevel, user_uid);
+		
+		redirectAttributes.addAttribute("pid", pid);
+	}
+
+	@Override
+	public void postingInfo(HttpServletRequest request, Model model) throws Exception {
+		// TODO Auto-generated method stub
+		int pid = Integer.parseInt(request.getParameter("pid"));
+
+		PostingDTO dto = postingDAO.postingInfo(pid);
+		
+	
+		
+		
+		request.setAttribute("postingInfo", dto);
+	}
+
+	@Override
+	public void postingDelete(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) throws Exception {
+		// TODO Auto-generated method stub
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		String pcategory = request.getParameter("pcategory");
+		
+		
+		try {
+			postingDAO.postingDelete(pid);
+			redirectAttributes.addFlashAttribute("deleteMessege", "게시물이 정상적으로 삭제 되었습니다.");
+			redirectAttributes.addAttribute("page", 1);
+			redirectAttributes.addAttribute("pcategory", pcategory);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			redirectAttributes.addFlashAttribute("deleteMessege", "게시물이 삭제되지 않았습니다. 다시시도 부탁드립니다.");
+		}
+		
 	}
 }

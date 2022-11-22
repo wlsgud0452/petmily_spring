@@ -24,5 +24,9 @@
 	<select id="showLikeAllCount" resultType="Integer">
 		select count(shlike) from showing where posting_pid = #{pid} and shlike >= 1
 	</select>
+	
+	<update id="showInsetLike">
+		update showing set shlike = #{likeCheck} where posting_pid = #{pid} and user_uid = #{user_uid}
+	</update>
 
 </mapper>

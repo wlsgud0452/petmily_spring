@@ -21,4 +21,10 @@ public interface PostingDAO {
 	public PostingDTO postingGetDetail(int pid) throws Exception;
 	
 	public List<PostingDTO> selectCommentList (int pid) throws Exception;
+	
+	public void postingRyplyWriteAction (String pparentid, String ureply, int plevel, String user_uid ) throws Exception;
+	
+	public PostingDTO postingInfo(int posting_pid) throws Exception;
+	
+	public void postingDelete(int pid) throws Exception;
 }

@@ -56,13 +56,47 @@ public class PostingContoroller {
 		return "board_view";
 	}
 	
+	@RequestMapping("posting_like_click")
+	public String posting_like_click(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		
+		service.postingLikeClick(request,model, session, redirectAttributes);
+		
+		return "redirect:posting_click";
+	}
 	
+	//신청버튼 눌렀을 때
 	@RequestMapping("posting_apply_insert")
 	public String posting_apply_insert(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
 		
 		service.postingApplyInsert(request,model,session, redirectAttributes);
 		
 		return "redirect:posting_click";
+	}
+	
+	//댓글 입력시
+	@RequestMapping("posting_reply_insert")
+	public String posting_reply_insert(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
+		
+		service.postingReplyInsert(request,model,session,redirectAttributes);
+		
+		return "redirect:posting_click";
+	}
+	
+	//게시물에서 수정 클릭시
+	@RequestMapping("posting_modify")
+	public String posting_modify(HttpServletRequest request, Model model) throws Exception{
+		
+		service.postingInfo(request,model);
+		
+		return "board_modify";
+	}
+	
+	@RequestMapping("posting_delete")
+	public String posting_delete(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) throws Exception{
+		
+		service.postingDelete(request, model, redirectAttributes);
+		
+		return ("redirect:posting");
 	}
 	
 	
