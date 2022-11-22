@@ -120,4 +120,13 @@ public class MypageController {
 		return "mypage_review";
 	}
 	
+	@RequestMapping("/mypage_write_list")
+	public String myPageWriteList(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageWriteList(request, model, session);
+		
+		return "mypage_write_list";
+	}
+	
 }

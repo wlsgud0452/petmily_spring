@@ -28,4 +28,8 @@ public interface PostingDAO {
 	public PostingDTO postingInfo(int posting_pid) throws Exception;
 	
 	public void postingDelete(int pid) throws Exception;
+	
+	public int postingWriteListRow(String uid , String pcategory) throws Exception;
+	
+	public List<PostingDTO> postingMypageWriteList(int start,int rowLength,String uid,String option,String pcategory, String query) throws Exception;
 }

@@ -28,4 +28,6 @@ public interface MypageService {
 	public void myPageAcceptedList(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
 	
 	public void myPageAcceptedComplete(HttpServletRequest request, Model model) throws Exception;
+	
+	public void myPageWriteList(HttpServletRequest request, Model model , HttpSession session) throws Exception;
 }

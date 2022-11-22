@@ -85,8 +85,7 @@
 
 						<c:when test="${param.page eq '1'}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="#">Previous
-							</a></li>
+							<li class="page-item disabled"><a class="page-link">Previous</a></li>
 						</c:when>
 
 						<c:when test="${param.page > paging.startPage}">
@@ -116,8 +115,7 @@
 
 						<c:when test="${param.page eq paging.totalPages}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="#">Next
-							</a></li>
+							<li class="page-item disabled"><a class="page-link">Next</a></li>
 						</c:when>
 
 						<c:when test="${param.page eq paging.endPage}">

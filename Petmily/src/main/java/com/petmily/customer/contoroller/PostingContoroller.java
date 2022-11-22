@@ -49,9 +49,9 @@ public class PostingContoroller {
 	}
 	
 	@RequestMapping("posting_click")
-	public String posting_click(HttpServletRequest request, Model model,HttpSession session) throws Exception {
+	public String posting_click(HttpServletRequest request, Model model,HttpSession session , RedirectAttributes redirectAttributes) throws Exception {
 		
-		service.postingClick(request, model,session);
+		service.postingClick(request, model,session , redirectAttributes);
 		
 		return "board_view";
 	}

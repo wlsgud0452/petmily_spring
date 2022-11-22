@@ -28,7 +28,7 @@ $(document).ready(function(){
 <div class="container">
 	<div class="row justify-content-center my-4 text-center">
 		<h4>${postingDetail.ptitle}</h4>
-		
+
 	</div>
 
 	<div class="row justify-content-between my-2">
@@ -50,7 +50,18 @@ $(document).ready(function(){
 		</div>
 
 		<%
-		String user_uid = request.getParameter("user_uid");
+		String user_uid_temp_one = request.getParameter("user_uid");
+		
+		String user_uid_temp_two = (String) request.getAttribute("postingUid");
+		
+		String user_uid = null;
+		
+		if(!(user_uid_temp_one == null)){
+			user_uid = user_uid_temp_one;
+		}else{
+			user_uid = user_uid_temp_two;
+		}
+		
 		%>
 		<c:set var="postAuthor" value="<%=user_uid%>" />
 
@@ -58,21 +69,25 @@ $(document).ready(function(){
 		<div class="col-2 text-end align-self-center">조회수 :
 			${postingView}</div>
 		<!-- pid , user_uid , aptitle , apcontent -->
-		<form action="posting_apply_insert" name="posting_apply_insert" id="posting_apply_insert" method="post">
+		<form action="posting_apply_insert" name="posting_apply_insert"
+			id="posting_apply_insert" method="post">
 			<div class="row justify-content-between my-2">
 				<div class="text-end">
 					<input type="hidden" name="user_uid" value="${postingUid }">
-					<input type="hidden" name="pid" value="${pid}">
-					<input type="hidden" name="pcategory" value="${postingDetail.pcategory}">
-
+					<input type="hidden" name="pid" value="${pid}"> <input
+						type="hidden" name="pcategory" value="${postingDetail.pcategory}">
+						
 					<c:choose>
+					
 						<c:when test="${user_uid eq postAuthor}">
 							<button class="btn btn-primary col-1 gy-2 align-self-center"
-								type="button" onclick="location.href='posting_modify?pid=${pid}&pcategory=${postingDetail.pcategory}'" 
+								type="button"
+								onclick="location.href='posting_modify?pid=${pid}&pcategory=${postingDetail.pcategory}'"
 								style="margin-top: 1.5rem; padding-top: 0.7rem; padding-bottom: 0.7rem;">수정하기</button>
 
 							<button class="btn btn-danger col-1 gy-2 align-self-center"
-								type="button" onclick="location.href='posting_delete?pid=${pid}&pcategory=${postingDetail.pcategory}'"
+								type="button"
+								onclick="location.href='posting_delete?pid=${pid}&pcategory=${postingDetail.pcategory}'"
 								style="margin-top: 1.5rem; padding-top: 0.7rem; padding-bottom: 0.7rem;">삭제하기</button>
 						</c:when>
 						<c:otherwise>
@@ -82,6 +97,7 @@ $(document).ready(function(){
 						</c:otherwise>
 
 					</c:choose>
+					
 				</div>
 			</div>
 
@@ -102,15 +118,14 @@ $(document).ready(function(){
 			</div>
 		</form>
 	</div>
-	<div>
-	${applyStatus}
-	</div>
+	<div>${applyStatus}</div>
 	<hr>
 
 	<div class="row justify-content-between">
 		<div class="col-4 text-start">
 			<i class="bi bi-geo-alt" style="font-size: 1.7rem;"></i> <span
-				class="mx-2">${postingDetail.plocation_basic} ${postingDetail.plocation_detail}</span>
+				class="mx-2">${postingDetail.plocation_basic}
+				${postingDetail.plocation_detail}</span>
 		</div>
 
 
@@ -118,18 +133,23 @@ $(document).ready(function(){
 	</div>
 
 	<!-- img -->
-	<c:if test="${not empty postingDetail.pimage1}">
 		<div class="row justify-content-center text-center my-5">
 			<div class="col-8">
-				<img src="posting/${postingDetail.pimage1}" class="rounded my-1"
-					alt="" style="width: 500px;"> <img
-					src="posting/${postingDetail.pimage2}" class="rounded my-1" alt=""
-					style="width: 500px;"> <img
-					src="posting/${postingDetail.pimage3}" class="rounded my-1" alt=""
-					style="width: 500px;">
+				<c:if test="${postingDetail.pimage1 ne null}">
+					<img src="posting/${postingDetail.pimage1}" class="rounded my-1"
+					alt="" style="width: 500px;"> 
+				</c:if>
+				<c:if test="${postingDetail.pimage2 ne null}">
+					<img src="posting/${postingDetail.pimage2}" class="rounded my-1"
+					alt="" style="width: 500px;"> 
+				</c:if>
+				<c:if test="${postingDetail.pimage3 ne null}">
+					<img src="posting/${postingDetail.pimage3}" class="rounded my-1"
+					alt="" style="width: 500px;"> 
+				</c:if>
+				
 			</div>
 		</div>
-	</c:if>
 	<!-- 게시글 내용 -->
 	<div class="row justify-content-center my-3">
 		<div class="col-8 text-right">${postingDetail.pcontent}</div>

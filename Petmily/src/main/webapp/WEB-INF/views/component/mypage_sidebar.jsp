@@ -20,18 +20,18 @@
 	<ul class="nav flex-column">
 	 	<c:if test="${user.utype eq 'companion' }">
 			<li class="nav-item my-2">
-			 <p class="h5"><a class="nav-link" href="mypage_apply_list" style="color:black;">신청 내역</a></p>
+				<p class="h5"><a class="nav-link" href="mypage_apply_list?page=1" style="color:black;">신청 내역</a></p>
 			</li>
 		</c:if>
 		
 		<c:if test="${user.utype eq 'companion' }">
 			<li class="nav-item my-2">
-			 <p class="h5"><a class="nav-link" href="mypage_accepted_list" style="color:black;">신청 수락한 내역</a></p>
+			 	<p class="h5"><a class="nav-link" href="mypage_accepted_list?page=1" style="color:black;">신청 수락한 내역</a></p>
 			</li>
 		</c:if>
 		
 		<li class="nav-item my-2">
-		 <p class="h5"><a class="nav-link" href="mypage_accept_list" style="color:black;">신청 수락된 내역</a></p>
+			<p class="h5"><a class="nav-link" href="mypage_accept_list?page=1" style="color:black;">신청 수락된 내역</a></p>
 		</li>
 
 	</ul>
@@ -45,7 +45,7 @@
 		</li>
 		
 		<li class="nav-item my-2">
-			<a class="nav-link" href="mypage_write_list?&pcategory=volunteer" style="color:black;"><p class="h5">작성 내역</p></a>
+			<a class="nav-link" href="mypage_write_list?pcategory=volunteer&page=1" style="color:black;"><p class="h5">작성 내역</p></a>
 		</li>
 		  
 	</ul>

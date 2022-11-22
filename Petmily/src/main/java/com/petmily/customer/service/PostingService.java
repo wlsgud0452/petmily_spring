@@ -17,7 +17,7 @@ public interface PostingService {
 	
 	public int postingWriteInsert (MultipartHttpServletRequest request, Model model, List<MultipartFile> multipartFiles, HttpSession session, RedirectAttributes redirectAttributes) throws Exception;
 	
-	public void postingClick (HttpServletRequest request, Model model, HttpSession session) throws Exception;
+	public void postingClick (HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception;
 	
 	public void postingApplyInsert (HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception; 
 	

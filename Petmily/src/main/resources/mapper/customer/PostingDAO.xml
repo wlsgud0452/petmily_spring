@@ -59,5 +59,14 @@
 		update posting set pdeletedate = now() where pid = #{pid}
 	</update>
 	
+	<select id="postingWriteListRow" resultType="Integer">
+		select count(*) from posting where pdeletedate is null and user_uid = #{uid} and pcategory = #{pcategory}
+	</select>
+	
+	<select id="postingMypageWriteList" resultType="com.petmily.customer.dto.PostingDTO">
+		select pid, ptitle, plocation_basic, pinitdate, user_uid, pcategory from posting 
+		where pcategory = #{pcategory} and pdeletedate is null and ${option} like CONCAT('%',#{query},'%') and user_uid = #{uid} 
+		order by pid desc limit #{start} , #{rowLength}
+	</select>
 	
 </mapper>

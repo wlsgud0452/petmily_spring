@@ -2,6 +2,7 @@ package com.petmily.customer.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.PostingDAO;
@@ -151,7 +153,7 @@ public class PostingServiceImpl implements PostingService {
 	}
 
 	@Override
-	public void postingClick(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+	public void postingClick(HttpServletRequest request, Model model, HttpSession session , RedirectAttributes redirectAttributes) throws Exception {
 		
 		UserDTO udto = (UserDTO)session.getAttribute("user");
 		
@@ -159,7 +161,18 @@ public class PostingServiceImpl implements PostingService {
 		int like = 0;
 		int likeCheck = 0;
 		int viewCheck=0;
-		int pid = Integer.parseInt(request.getParameter("pid"));
+		int pid = 0;
+		
+		if(!(request.getParameter("pid") == null)) {
+			pid = Integer.parseInt(request.getParameter("pid"));
+		}
+		
+		Map<String, ?> redirectMap = RequestContextUtils.getInputFlashMap(request);  
+	    if( redirectMap  != null ){
+	        pid =  (int) redirectMap.get("pid") ;  
+	       
+	    }
+		
 		String postingUid = "";
 		String postingUserNickname = "";
 		String uimage = "";
@@ -168,6 +181,7 @@ public class PostingServiceImpl implements PostingService {
 		PostingDTO pdto = postingDAO.postingGetDetail(pid); 
 		
 		postingUid = pdto.getUser_uid();
+		
 		
 		viewCheck = showDAO.showViewCount(pid, user_uid);
 		likeCheck = showDAO.showLikeCount(pid, user_uid);
@@ -200,7 +214,7 @@ public class PostingServiceImpl implements PostingService {
 		model.addAttribute("commentList", commentList);
 //		model.addAttribute("commentImageList", commentImageList);
 	}
-
+	
 	@Override
 	public void postingApplyInsert(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 		
@@ -253,9 +267,10 @@ public class PostingServiceImpl implements PostingService {
 			showDAO.showInsetLike(pid, user_uid, likeCheck);
 		}
 		
-		redirectAttributes.addAttribute("likeCheck", likeCheck);
-		redirectAttributes.addAttribute("postingLike", postingLike);
-		redirectAttributes.addAttribute("pid", pid);
+		redirectAttributes.addFlashAttribute("likeCheck", likeCheck );
+		redirectAttributes.addFlashAttribute("postingLike", postingLike );
+		redirectAttributes.addFlashAttribute("pid", pid);
+		redirectAttributes.addFlashAttribute("user_uid", user_uid );
 		
 	}
 

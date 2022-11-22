@@ -93,5 +93,18 @@ public class PostingDAOImpl implements PostingDAO{
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + ".postingDelete");
 	}
+	
+	@Override
+	public int postingWriteListRow(String uid , String pcategory) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".postingWriteListRow");
+	}
+	
+	@Override
+	public List<PostingDTO> postingMypageWriteList(int start, int rowLength, String uid, String option,
+			String pcategory, String query) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".postingMypageWriteList") ;
+	}
 
 }

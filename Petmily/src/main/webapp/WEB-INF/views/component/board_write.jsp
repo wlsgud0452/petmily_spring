@@ -28,16 +28,14 @@
 	var url = new URL(url_href);
 	var pcategory = url.searchParams.get("pcategory");
 
-	$(document)
-			.ready(
-					function() {
+	$(document).ready( function() {
 
 						$("#pcategory").val(pcategory).attr("selected",
 								"selected");
 						
 						
 						$("#file").change(function(){
-							if($("#file")[0].files.length>4){
+							if($('#file')[0].files.length > 3){
 								$("#file").val("");
 								alert("세개 까지만 가능해요");
 								
@@ -152,11 +150,6 @@
 					업로드 </label>
 					<input multiple="multiple" type="file" class="form-control my-2" id="file" name="file"
 						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" >
-						<!-- <input type="file" class="form-control my-2" id="file2" name="file2"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*">
-						<input type="file" class="form-control my-2" id="file3" name="file3"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*"> -->
-					
 			</div>
 
 		</div>

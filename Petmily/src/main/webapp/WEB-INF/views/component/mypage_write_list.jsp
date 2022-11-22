@@ -14,95 +14,47 @@
 }
 </style>
 
-<script>
-	function changeForm() {
-
-		var form = document.posting
-
-		var pcategory = document.getElementById('pcategory').value
-
-		form.action = 'posting_write?pcategory=' + pcategory
-
-		form.submit()
-
-	}
-</script>
-
 <div class="container">
 	<form action="mypage_write_list" name="posting">
 
-		<%
-			String param = request.getParameter("pcategory");
-			String attribute = (String) request.getAttribute("pcategory");
-			
-			
-			if(param == null || param.equals("")){
-		%>	
-				<c:set var="pcategory" value="<%=attribute %>" />
-		<% 		
-			}
-			
-			if(attribute == null || attribute.equals("")){
-		%>
-		
-				<c:set var="pcategory" value="<%=param %>" />
-		<% 		
-			}
-		%>
-		
-		<div class="row justify-content-start my-2">
 
-			<input type="hidden" name="pcategory" id="pcategory" value="${pcategory }">
+		<div class="row justify-content-start my-2">
 
 		</div>
 
 		<div class="row my-3">
 			<div class="col-1"></div>
 			<!-- 드롭다운  -->
-				<div class="col-2">
-					<select class="form-select w-100"
-						aria-label="Default select example" name="pcategory">
-						<option value="volunteer" selected>함께 봉사</option>
-						<option value="walk" >함께 산책</option>
-						<option value="petcafe">함께 펫카페</option>
-						<option value="find">찾아주세요</option>
-						<option value="found">찾았어요</option>
-					</select>
-				</div>
-				<div class="col-1">
-					<select class="form-select w-100"
-						aria-label="Default select example" name="option">
-						<option value="ptitle" selected>제목</option>
-						<option value="plocation">장소</option>
-					</select>
-				</div>
-				<!-- 검색  -->
-				<div class="col-3">
-					<input type="text" class="form-control" name="query"
-						id="exampleFormControlInput1" placeholder="검색어를 입력해 주세요">
-				</div>
-
-				<!-- 검색 버튼 -->
-				<div class="col-1">
-					<input class="btn btn-warning " type="submit" value="검색">
-				</div>
-			
-			<div class="col-2"></div>
-
-			<div class="col-1">
-				<c:choose>
-					<c:when test="${user.utype eq 'companion' }">
-						<button class="btn btn-warning" type="button"
-							onclick="changeForm()" style="display: block">작성</button>
-					</c:when>
-
-					<c:otherwise>
-						<button class="btn btn-warning" type="button"
-							onclick="changeForm()" style="display: none">작성</button>
-					</c:otherwise>
-				</c:choose>
+			<div class="col-2">
+				<select class="form-select w-100"
+					aria-label="Default select example" name="pcategory">
+					<option value="volunteer">함께 봉사</option>
+					<option value="walk">함께 산책</option>
+					<option value="petcafe">함께 펫카페</option>
+					<option value="find">찾아주세요</option>
+					<option value="found">찾았어요</option>
+				</select>
 			</div>
-			<div class="col-1"></div>
+			<div class="col-1">
+				<select class="form-select w-100"
+					aria-label="Default select example" name="option">
+					<option value="ptitle" selected>제목</option>
+					<option value="plocation_basic">장소</option>
+				</select>
+			</div>
+			<!-- 검색  -->
+			<div class="col-3">
+				<input type="text" class="form-control" name="query"
+					id="exampleFormControlInput1" placeholder="검색어를 입력해 주세요">
+			</div>
+
+			<!-- 검색 버튼 -->
+			<div class="col-1">
+				<input class="btn btn-warning " type="submit" value="검색">
+			</div>
+
+			<div class="col-4"></div>
+
 		</div>
 
 		<div class="row justify-content-center my-5">
@@ -128,23 +80,29 @@
 								href="posting_click?pid=${list.pid }&user_uid=${list.user_uid}">${list.ptitle }</a></td>
 							<td>${list.user_uid }</td>
 							<td>${list.pinitdate }</td>
-							<td>${list.plocation }</td>
+							<td>${list.plocation_basic }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 
+		<!-- 페이징 -->
 		<div class="row justify-content-center my-2">
-
 			<nav aria-label="Page navigation example ">
 				<ul class="pagination justify-content-center">
 					<c:set var="startPage" value="paging.startPage" />
 					<c:choose>
 
-						<c:when test="${paging.startPage eq '1'}">
+						<c:when test="${param.page eq '1'}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="#">Previous
+							<li class="page-item disabled"><a class="page-link">Previous</a></li>
+						</c:when>
+
+						<c:when test="${param.page > paging.startPage}">
+							<!-- if -->
+							<li class="page-item"><a class="page-link"
+								href="mypage_write_list?page=${param.page - 1}&pcategory=${param.pcategory }">Previous
 							</a></li>
 						</c:when>
 
@@ -166,17 +124,24 @@
 
 					<c:choose>
 
-						<c:when test="${paging.totalPages eq paging.endPage}">
+						<c:when test="${param.page eq paging.totalPages}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="#">> </a></li>
+							<li class="page-item disabled"><a class="page-link">Next</a></li>
 						</c:when>
 
-						<c:otherwise>
-							<!-- else -->
+						<c:when test="${param.page eq paging.endPage}">
+							<!-- if -->
 							<li class="page-item"><a class="page-link"
 								href="mypage_write_list?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next
 							</a></li>
-						</c:otherwise>
+						</c:when>
+
+						<c:when test="${param.page < paging.endPage}">
+							<!-- if -->
+							<li class="page-item"><a class="page-link"
+								href="mypage_write_list?page=${param.page + 1}&pcategory=${param.pcategory }">Next
+							</a></li>
+						</c:when>
 
 					</c:choose>
 				</ul>
