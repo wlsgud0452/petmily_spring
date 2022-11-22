@@ -15,5 +15,8 @@ public interface UserDAO {
 	public UserDTO userInfo(String uid) throws Exception;
 	
 	public String selectUimage(String uid) throws Exception;
+
+	public String selectImage(String postingUid) throws Exception;
+
 	
 }

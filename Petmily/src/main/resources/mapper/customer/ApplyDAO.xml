@@ -43,5 +43,14 @@
 		update apply set apcanceldate = now() where posting_pid = #{pid} and apmatchingdate is null
 	</update>
 	
+
+	<select id="applyUserCount" resultType="Integer">
+		select count(apid) from apply where user_uid = #{user_uid} and posting_pid = #{posting_pid}
+	</select>
+	
+	<insert id="postingApplyInsert">
+		insert into apply (user_uid, posting_pid, posting_user_uid, aptitle, apcontent, apdate) 
+		values (#{user_uid},#{posting_pid},#{posting_user_uid},#{aptitle},#{apcontent},now())
+	</insert>
 	
 </mapper>

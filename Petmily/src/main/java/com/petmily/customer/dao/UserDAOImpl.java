@@ -46,4 +46,10 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".selectUimage");
 	}
+
+	@Override
+	public String selectImage(String postingUid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".selectImage");
+	}
 }

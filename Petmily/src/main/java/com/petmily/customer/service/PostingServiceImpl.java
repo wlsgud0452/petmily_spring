@@ -9,11 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.PostingDAO;
+import com.petmily.customer.dao.ShowDAO;
+import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.PostingDTO;
 import com.petmily.customer.dto.UserDTO;
@@ -23,11 +26,17 @@ public class PostingServiceImpl implements PostingService {
 	
 	@Autowired
 	PostingDAO postingDAO;
+	@Autowired
+	ShowDAO showDAO;
+	@Autowired
+	UserDAO userDAO;
+	@Autowired
+	ApplyDAO applyDAO;
+	
 	
 	@Override
 	public void posting(HttpServletRequest request, Model model) throws Exception {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 //		String user_uid = (String) session.getAttribute("user.uid");
 		
 		int cPage = 0;
@@ -76,10 +85,11 @@ public class PostingServiceImpl implements PostingService {
 		
 		model.addAttribute("paging", dto);
 		model.addAttribute("postingList", dtos);
+		
 	}
 
 	@Override
-	public int postingWriteInsert(MultipartHttpServletRequest request, Model model,List<MultipartFile> multipartFiles, HttpSession session) throws Exception {
+	public int postingWriteInsert(MultipartHttpServletRequest request, Model model,List<MultipartFile> multipartFiles, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 		UserDTO udto = (UserDTO)session.getAttribute("user");
 		String user_uid = udto.getUid();
 		
@@ -94,6 +104,8 @@ public class PostingServiceImpl implements PostingService {
 		int lastPostingId;
 		
 		multipartFiles = request.getFiles("file");
+		try {
+			
 		
 		//텍스트만 입력
 		postingDAO.postingInsertText(ptitle,pcategory,pcontent,plocation_basic,plocation_detail,user_uid);
@@ -127,8 +139,97 @@ public class PostingServiceImpl implements PostingService {
 			file.transferTo(saveFile);
 			cnt++;
 		}
-		postingDAO.updateImages(pimage1, pimage2, pimage3, lastPostingId);
+		redirectAttributes.addAttribute("pcategory",pcategory);
+		redirectAttributes.addAttribute("page",1);
 		
+		postingDAO.updateImages(pimage1, pimage2, pimage3, lastPostingId);
 		return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public void postingClick(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		
+		UserDTO udto = (UserDTO)session.getAttribute("user");
+		
+		int view = 0;
+		int like = 0;
+		int likeCheck = 0;
+		int viewCheck=0;
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		String postingUid = "";
+		String postingUserNickname = "";
+		String uimage = "";
+		String user_uid = udto.getUid();
+		
+		PostingDTO pdto = postingDAO.postingGetDetail(pid); 
+		
+		postingUid = pdto.getUser_uid();
+		
+		viewCheck = showDAO.showViewCount(pid, user_uid);
+		likeCheck = showDAO.showLikeCount(pid, user_uid);
+		
+		uimage = userDAO.selectImage(postingUid);
+		
+		if( viewCheck == 0 ) {
+			showDAO.showInsertView(pid, user_uid);
+		}
+		
+		view = showDAO.showViewAllCount(pid);
+		like = showDAO.showLikeAllCount(pid);
+		
+		// 댓글 불러오기
+		// pcontent , pinitdate , user_uid 가져오기
+		List<PostingDTO> commentList = postingDAO.selectCommentList(pid);
+		
+		
+		
+		//ArrayList<String> commentImageList = udao.selectImageList();
+		
+		model.addAttribute("user_uid", user_uid);
+		model.addAttribute("pid", pid);
+		model.addAttribute("postingView", view);
+		model.addAttribute("postingLike", like);
+		model.addAttribute("likeCheck", likeCheck);
+		model.addAttribute("postingDetail", pdto);
+		model.addAttribute("postingUid", postingUid);
+		model.addAttribute("postingUimage", uimage);
+		model.addAttribute("commentList", commentList);
+		//request.setAttribute("commentImageList", commentImageList);
+	}
+
+	@Override
+	public void postingApplyInsert(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		
+		UserDTO udto = (UserDTO)session.getAttribute("user");
+		
+		String user_uid = "";
+		String posting_user_uid = "";
+		String aptitle = "";
+		String apcontent = "";
+		int posting_pid = 0;
+		int count = 0;
+		
+		user_uid = udto.getUid();
+		posting_pid = Integer.parseInt(request.getParameter("pid"));
+		posting_user_uid = request.getParameter("user_uid");
+		aptitle = request.getParameter("aptitle");
+		apcontent = request.getParameter("apcontent");
+		
+		count = applyDAO.applyUserCount(user_uid, posting_pid);
+		
+		if ( count == 0) {
+			applyDAO.postingApplyInsert(user_uid, posting_pid, posting_user_uid, aptitle, apcontent);
+			redirectAttributes.addAttribute("applyStatus", "신청이 완료되었습니다.");
+			
+		}
+		
+		if(count == 1){
+			redirectAttributes.addAttribute("applyStatus", "이미 신청한 내역이 있습니다.<br>신청은 한 번만 가능합니다.");			
+		}
+		redirectAttributes.addAttribute("pid",posting_pid);
 	}
 }

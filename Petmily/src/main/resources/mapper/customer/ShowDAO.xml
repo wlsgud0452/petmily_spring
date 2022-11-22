@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.petmily.customer.dao.ShowDAO">
+
+	<select id="showViewCount" resultType="Integer">
+		select count(shdate) from showing where user_uid = #{user_uid} and posting_pid = #{pid}
+	</select>
+	
+	<select id="showLikeCount" resultType="Integer">
+		select count(shlike) from showing where user_uid = #{user_uid} and posting_pid = #{pid} and shlike and shlike >= 1
+	</select>
+	
+	<insert id="showInsertView">
+		insert into showing  (posting_pid, user_uid, shdate, shlike) values (#{pid},#{user_uid},now(),0)
+	</insert>
+	
+	<select id="showViewAllCount" resultType="Integer">
+		select count(shdate) from showing where posting_pid = #{pid} and shdate is not null
+	</select>
+	
+	<select id="showLikeAllCount" resultType="Integer">
+		select count(shlike) from showing where posting_pid = #{pid} and shlike >= 1
+	</select>
+
+</mapper>

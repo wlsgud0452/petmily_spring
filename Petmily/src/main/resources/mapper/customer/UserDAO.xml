@@ -30,4 +30,8 @@
 	<select id="selectUimage" resultType="String">
 		select uimage from user where uid = #{uid}
 	</select>
+
+	<select id="selectImage" resultType="String">
+		select uimage from user where uid = #{postingUid}
+	</select>
 </mapper>

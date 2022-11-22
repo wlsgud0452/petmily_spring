@@ -29,12 +29,22 @@
 		update posting set pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3} where pid = #{lastPostingId}
 	</update>
 	
+
 	<select id="acceptPostingList" resultType="com.petmily.customer.dto.PostingDTO">
 		select p.pid , p.user_uid , p.pcategory , p.ptitle , p.pinitdate , p.plocation
 		from posting p inner join apply a
 		where p.pid = a.posting_pid and a.user_uid = #{uid} 
 		and a.apcanceldate is null and a.apmatchingdate is not null and a.apcompletedate is null
 		order by a.apmatchingdate limit #{start}, #{rowLength}
+	</select>
+	
+	<select id="postingGetDetail" resultType="com.petmily.customer.dto.PostingDTO">
+		select ptitle, pcontent, pimage1, pimage2, pimage3, plocation_basic, plocation_detail, pinitdate, user_uid, pcategory 
+		from posting where pid = #{pid}
+	</select>
+	
+	<select id="selectCommentList" resultType="com.petmily.customer.dto.PostingDTO">
+		select pcontent, pinitdate, user_uid, pcategory from posting where pparentid = #{pid} order by pinitdate desc
 	</select>
 	
 </mapper>
