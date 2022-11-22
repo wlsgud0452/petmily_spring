@@ -47,4 +47,17 @@
 		select pcontent, pinitdate, user_uid, pcategory from posting where pparentid = #{pid} order by pinitdate desc
 	</select>
 	
+	<insert id="postingRyplyWriteAction">
+		insert into posting (pparentid, pcontent, plevel, user_uid, pinitdate ) values (#{pparentid},#{ureply},#{plevel},#{user_uid},now())
+	</insert>
+	
+	<select id="postingInfo" resultType="com.petmily.customer.dto.PostingDTO">
+		select pid, ptitle, pcontent, pimage1, pimage2, pimage3, pcategory, plocation_basic, plocation_detail , pinitdate from posting where pid = #{posting_pid}
+	</select>
+	
+	<update id="postingDelete">
+		update posting set pdeletedate = now() where pid = #{pid}
+	</update>
+	
+	
 </mapper>

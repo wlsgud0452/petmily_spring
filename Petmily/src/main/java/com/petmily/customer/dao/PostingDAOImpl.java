@@ -39,6 +39,7 @@ public class PostingDAOImpl implements PostingDAO{
 	public void postingInsertText(String ptitle, String pcategory, String pcontent, String plocation_basic,
 			String plocation_detail,String user_uid) throws Exception {
 		// TODO Auto-generated method stub
+		sqlSession.insert(nameSpace + ".postingInsertText"); 
 		
 	}
 
@@ -53,6 +54,7 @@ public class PostingDAOImpl implements PostingDAO{
 	@Override
 	public void updateImages(String pimage1, String pimage2, String pimage3, int lastPostingId) throws Exception {
 		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + ".updateImages");
 	}
 
 
@@ -67,6 +69,29 @@ public class PostingDAOImpl implements PostingDAO{
 	public List<PostingDTO> selectCommentList(int pid) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + ".selectCommentList");
+	}
+
+
+	@Override
+	public void postingRyplyWriteAction(String pparentid, String ureply, int plevel, String user_uid) throws Exception {
+		// TODO Auto-generated method stub
+		
+		sqlSession.insert(nameSpace + "postingRyplyWriteAction"); 
+		
+	}
+
+
+	@Override
+	public PostingDTO postingInfo(int posting_pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".postingInfo");
+	}
+
+
+	@Override
+	public void postingDelete(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + ".postingDelete");
 	}
 
 }

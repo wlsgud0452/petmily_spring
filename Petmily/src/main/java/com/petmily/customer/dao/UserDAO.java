@@ -1,5 +1,8 @@
 package com.petmily.customer.dao;
 
+import java.util.List;
+
+import com.petmily.customer.dto.PostingDTO;
 import com.petmily.customer.dto.UserDTO;
 
 public interface UserDAO {
@@ -18,5 +21,7 @@ public interface UserDAO {
 
 	public String selectImage(String postingUid) throws Exception;
 
+	
+	public List<String> selectImageList (List<PostingDTO> commentList) throws Exception;
 	
 }

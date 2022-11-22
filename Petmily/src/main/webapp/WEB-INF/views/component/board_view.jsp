@@ -28,7 +28,6 @@ $(document).ready(function(){
 <div class="container">
 	<div class="row justify-content-center my-4 text-center">
 		<h4>${postingDetail.ptitle}</h4>
-		<label>${applyStatus}url을 확인해 주세요</label>
 		
 	</div>
 
@@ -59,7 +58,7 @@ $(document).ready(function(){
 		<div class="col-2 text-end align-self-center">조회수 :
 			${postingView}</div>
 		<!-- pid , user_uid , aptitle , apcontent -->
-		<form action="posting_apply_insert" name="posting_apply_insert" id="posting_apply_insert" method="get">
+		<form action="posting_apply_insert" name="posting_apply_insert" id="posting_apply_insert" method="post">
 			<div class="row justify-content-between my-2">
 				<div class="text-end">
 					<input type="hidden" name="user_uid" value="${postingUid }">
@@ -195,7 +194,7 @@ $(document).ready(function(){
 		</div>
 	</c:forEach> --%>
 
-	<form action="posting_reply_insert" method="get" id="reply">
+	<form action="posting_reply_insert" method="post" id="reply">
 		<div class="row justify-content-center my-5">
 			<div class="col-6">
 				<input type="text" class="form-control" name="ureply"

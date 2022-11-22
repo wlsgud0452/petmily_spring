@@ -37,5 +37,11 @@ public class ShowDAOImpl implements ShowDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".showLikeAllCount");
 	}
+
+	@Override
+	public void showInsetLike(int pid, String user_uid, int likeCheck) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

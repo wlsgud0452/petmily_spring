@@ -10,4 +10,6 @@ public interface ShowDAO {
 	public int showViewAllCount(int pid) throws Exception;
 	
 	public int showLikeAllCount(int pid) throws Exception;
+	
+	public void showInsetLike(int pid, String user_uid, int likeCheck) throws Exception;
 }

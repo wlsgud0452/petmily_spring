@@ -120,7 +120,7 @@
 			<div class="col-4 mb-3 gy-2">
 				<label for="exampleFormControlInput1" class="form-label">주소
 				</label> <input type="text" class="form-control" name="plocation_basic"
-					id="plocation_basic" placeholder="주소를 입력해 주세요" readonly>
+					id="plocation_basic" placeholder="주소를 입력해 주세요" readonly value="${postingInfo.plocation_basic}">
 			</div>
 			<!-- 주소 검색 버튼 -->
 			<button class="btn btn-warning col-1 gy-2 align-self-center"
@@ -133,7 +133,7 @@
 		<div class="row justify-content-center ">
 			<div class="col-6 mb-3">
 				<input type="text" class="form-control" name="plocation_detail"
-					id="exampleFormControlInput1" placeholder="상세 주소를 입력해 주세요">
+					id="exampleFormControlInput1" placeholder="상세 주소를 입력해 주세요" value="${postingInfo.plocation_detail}">
 			</div>
 		</div>
 
@@ -143,11 +143,13 @@
 				<label for="exampleFormControlInput1" class="form-label">사진
 					업로드 </label>
 					<input type="file" class="form-control my-2" id="file1" name="file1"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" >
+						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" value="${ postingInfo.pimage1}">
+						
 						<input type="file" class="form-control my-2" id="file2" name="file2"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" >
+						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" value="${ postingInfo.pimage2}">
+						
 						<input type="file" class="form-control my-2" id="file3" name="file3"
-						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" >
+						aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/*" value="${ postingInfo.pimage3}">
 					
 			</div>
 

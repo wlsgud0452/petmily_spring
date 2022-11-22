@@ -21,4 +21,12 @@ public interface PostingService {
 	
 	public void postingApplyInsert (HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception; 
 	
+	public void postingLikeClick(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception;
+	
+	public void postingReplyInsert(HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception;
+	
+	public void postingInfo(HttpServletRequest request, Model model) throws Exception;
+	
+	public void postingDelete(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) throws Exception;
+	
 }
