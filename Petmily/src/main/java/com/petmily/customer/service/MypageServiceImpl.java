@@ -14,10 +14,12 @@ import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.LecturecheckDAO;
 import com.petmily.customer.dao.PostingDAO;
 import com.petmily.customer.dao.ReviewDAO;
+import com.petmily.customer.dao.ShowDAO;
 import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.ApplyDTO;
 import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.PostingDTO;
+import com.petmily.customer.dto.ShowDTO;
 import com.petmily.customer.dto.UserDTO;
 
 @Service
@@ -37,6 +39,9 @@ public class MypageServiceImpl implements MypageService {
 	
 	@Autowired
 	PostingDAO postingDAO;
+	
+	@Autowired
+	ShowDAO showDAO;
 	
 	@Override
 	public int myPageModifyLogin(HttpServletRequest request , HttpSession session) throws Exception {
@@ -476,6 +481,13 @@ public class MypageServiceImpl implements MypageService {
 		int start = (cPage - 1) * rowLength;
 		
 		List<PostingDTO> dtos = postingDAO.postingMypageWriteList(start, rowLength, uid, option, pcategory, query);
+		
+//		List<ShowDTO> showDTO = new ArrayList<>();
+//		for(PostingDTO pdto : dtos) {
+//			int pid = pdto.getPid();
+//			int show = showDAO.
+//			
+//		}
 		
 		model.addAttribute("paging", dto);
 		model.addAttribute("postingList", dtos);
