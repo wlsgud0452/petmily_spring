@@ -22,7 +22,7 @@ public class ChallengeController {
 	}
 	
 	@RequestMapping("/lecture_check")
-	public String lecture_check(HttpServletRequest request, Model model) throws Exception {
+	public String lectureCheck(HttpServletRequest request, Model model) throws Exception {
 		
 		service.execute(request, model);
 		

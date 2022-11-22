@@ -53,7 +53,7 @@ public class ApplyDAOImpl implements ApplyDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + ".acceptApidList");
 	}
-
+	
 	@Override
 	public int applyUserCount(String user_uid, int posting_pid) throws Exception {
 		// TODO Auto-generated method stub
@@ -66,5 +66,17 @@ public class ApplyDAOImpl implements ApplyDAO {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	@Override
+	public int acceptedListRow(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".acceptedListRow");
+	}
+	
+	@Override
+	public List<ApplyDTO> acceptedGetList(int rowLength, int start, String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".acceptedGetList");
+	}
+	
 }

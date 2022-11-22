@@ -20,6 +20,10 @@ public interface ApplyDAO {
 	public List<Integer> acceptApidList(String uid) throws Exception; 
 	
 	public int applyUserCount(String user_uid, int posting_pid) throws Exception;
+
+	public int acceptedListRow(String uid) throws Exception;
+	
+	public List<ApplyDTO> acceptedGetList(int rowLength,int start ,String uid ) throws Exception;
 	
 	public void postingApplyInsert (String user_uid, int posting_pid, String posting_user_uid, String aptitle, String apcontent) throws Exception;
 }
