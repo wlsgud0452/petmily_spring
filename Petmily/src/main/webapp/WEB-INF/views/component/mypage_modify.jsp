@@ -82,7 +82,7 @@
 			<!-- text field + 제목 -->
 			<div class="col-4 mb-3 gy-2">
 				<label for="exampleFormControlInput1" class="form-label">주소
-				</label> <input type="text" class="form-control" name="uaddress_basic"
+				</label> <input type="text" class="form-control" name="uaddress_basic" value="${userInfo.uaddress_basic}"
 					id="exampleFormControlInput1" placeholder="주소를 입력해 주세요">
 			</div>
 			<button class="btn col-1 gy-2 align-self-center" type="button"
@@ -94,9 +94,8 @@
 			<div class="col-6 mb-3">
 				<input type="text" class="form-control" name="uaddress_detail"
 					id="exampleFormControlInput1" placeholder="상세 주소를 입력해 주세요"
-					value="${userInfo.uaddress}"
+					value="${userInfo.uaddress_detail}"
 					>
-					<!-- 이거 문자열 자르는게 너무 불특정해서 상세주소로 나눠서 어케 받아야할지 모르겠음....... -->
 			</div>
 		</div>
 		

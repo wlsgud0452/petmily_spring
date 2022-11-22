@@ -85,13 +85,12 @@ public class SignUpServiceImpl implements SignupService {
 		String uaddress_basic = request.getParameter("uaddress_basic");
 		// uaddress_detail
 		String uaddress_detail = request.getParameter("uaddress_detail");
-		String uaddress = uaddress_basic + " " + uaddress_detail;
 		// utype
 		String utype = request.getParameter("utype");
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		// database user table에 insert 하기
-		userDAO.insert(uid, upw, uname, uphone, uemail, unickname, uaddress, utype, uimage);
+		userDAO.insert(uid, upw, uname, uphone, uemail, unickname, uaddress_basic, uaddress_detail , utype, uimage);
 		
 		if (utype.equals("companion")) {
 			// pet table에 들어가야 될 값들

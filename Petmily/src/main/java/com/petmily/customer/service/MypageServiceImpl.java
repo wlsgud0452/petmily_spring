@@ -221,15 +221,14 @@ public class MypageServiceImpl implements MypageService {
 		int start = (cPage - 1) * rowLength;
 		List<ApplyDTO> dtos = applyDAO.applyGetList(rowLength, start ,uid );
 		List<UserDTO> udtos = new ArrayList<>();
-		int userRating = 0;
+		Integer userRating = null;
 		
 		// uid를 가지고 이제 uid 값들을 가져와야된다.
 		for(ApplyDTO list : dtos) {
 			String apply_uid = list.getUser_uid();
 			UserDTO udto2 = userDAO.userInfo(apply_uid);
 			userRating = reviewDAO.selectRating(apply_uid);
-			if(userRating == 0 ) {
-				// 아직 평점이 없을 경우는 그냥 5점 준다. 평균
+			if(userRating == null ) {
 				userRating = 5;
 			}
 			udtos.add(udto2);
@@ -382,14 +381,14 @@ public class MypageServiceImpl implements MypageService {
 		
 		List<ApplyDTO> dtos = applyDAO.acceptedGetList(rowLength, start ,uid );
 		List<UserDTO> udtos = new ArrayList<>();
-		int userRating = 0;
+		Integer userRating = null;
 		
 		// uid를 가지고 이제 uid 값들을 가져와야된다.
 		for(ApplyDTO list : dtos) {
 			String apply_uid = list.getUser_uid();
 			UserDTO udto2 = userDAO.userInfo(apply_uid);
 			userRating = reviewDAO.selectRating(apply_uid);
-			if(userRating == 0 ) {
+			if(userRating == null ) {
 				// 아직 평점이 없을 경우는 그냥 5점 준다. 평균
 				userRating = 5;
 			}

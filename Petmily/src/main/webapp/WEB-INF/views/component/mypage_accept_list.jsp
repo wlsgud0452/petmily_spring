@@ -60,7 +60,7 @@
 								href="posting_click?pid=${list.pid }&user_uid=${list.user_uid}&pcategory=${list.pcategory}">${list.ptitle }</a></td>
 							<td>${list.user_uid }</td>
 							<td>${list.pinitdate }</td>
-							<td>${list.plocation }</td>
+							<td>${list.plocation_basic }</td>
 							<td><button type="button" class="btn btn-outline-primary"
 									value="complete" name="complete" data-toggle="button"
 									style="margin-right: 0.8rem;">완료</button></td>

@@ -8,7 +8,7 @@ public interface UserDAO {
 	public UserDTO login(String uid, String upw) throws Exception;
 
 	public void insert(String uid, String upw, String uname, String uphone, String uemail, String unickname,
-			String uaddress, String utype, String uimage) throws Exception;
+			String uaddress_basic, String uaddress_detail , String utype, String uimage) throws Exception;
 	
 	public int registerCheck(String uid) throws Exception;
 	

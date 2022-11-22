@@ -14,9 +14,9 @@
 	</select>
 	
 	<insert id="insert">
-		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress, utype, uimage , uinitdate) 
+		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress_basic, uaddress_detail, utype, uimage , uinitdate) 
 		values 
-		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress} , #{utype} ,#{uimage} , now())
+		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress_basic} , #{uaddress_detail} , #{utype} ,#{uimage} , now())
 	</insert>
 	
 	<select id="registerCheck" resultType="Integer">
@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="userInfo" resultType="com.petmily.customer.dto.UserDTO">
-		select uname, uemail, uphone, uaddress, unickname, uimage from user where uid = #{uid}
+		select uname, uemail, uphone, uaddress_basic, uaddress_detail , unickname, uimage from user where uid = #{uid}
 	</select>
 	
 	<select id="selectUimage" resultType="String">

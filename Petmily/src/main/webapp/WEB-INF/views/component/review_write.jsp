@@ -57,7 +57,7 @@
 		<div class="text-center ">
 			<label style="font-size: 30px;">
 			<strong>
-			<label style="color: #e8853e;">${posting_pid }</label> 님과의 만남이 즐거우셨나요?</strong></label>
+			<label style="color: #e8853e;">${to_uid }</label> 님과의 만남이 즐거우셨나요?</strong></label>
 		</div>
 
 		<div class="text-center">

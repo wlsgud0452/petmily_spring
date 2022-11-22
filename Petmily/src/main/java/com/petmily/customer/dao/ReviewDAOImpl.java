@@ -9,7 +9,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public static String nameSpace = "com.petmily.customer.dao.ReviewDAO";
 	
 	@Override
-	public int selectRating(String uid) throws Exception {
+	public Integer selectRating(String uid) throws Exception {
 		
 		return sqlSession.selectOne(nameSpace + ".selectRating");
 	}
