@@ -351,7 +351,82 @@ public class MypageServiceImpl implements MypageService {
 		
 		reviewDAO.insert(revtext, Integer.parseInt(revrating) , from_uid , posting_pid , to_uid);
 		
+	}
+	
+	@Override
+	public void myPageAcceptedList(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		UserDTO udto = (UserDTO) session.getAttribute("user");
+		String uid = udto.getUid();
+		
+		int cPage = 0;
+		int pageLength = 5;
+		int totalRows = 0;
+		int rowLength=5;
+		
+		String tempPage = request.getParameter("page");
+		
+		if(tempPage == null || tempPage.length()==0) {
+			cPage = 1;
+		}
+		try {
+			cPage = Integer.parseInt(tempPage);
+		} catch (Exception e) {
+			cPage = 1;
+		}
+		
+		totalRows = applyDAO.acceptedListRow(uid);
+		
+		PagingDTO dto = new PagingDTO(cPage, totalRows, pageLength);
+		int start = (cPage - 1) * rowLength;
+		
+		List<ApplyDTO> dtos = applyDAO.acceptedGetList(rowLength, start ,uid );
+		List<UserDTO> udtos = new ArrayList<>();
+		int userRating = 0;
+		
+		// uid를 가지고 이제 uid 값들을 가져와야된다.
+		for(ApplyDTO list : dtos) {
+			String apply_uid = list.getUser_uid();
+			UserDTO udto2 = userDAO.userInfo(apply_uid);
+			userRating = reviewDAO.selectRating(apply_uid);
+			if(userRating == 0 ) {
+				// 아직 평점이 없을 경우는 그냥 5점 준다. 평균
+				userRating = 5;
+			}
+			udtos.add(udto2);
+		}
+		
+		model.addAttribute("paging", dto);
+		model.addAttribute("acceptedList", dtos);
+		model.addAttribute("acceptedUserInfoList", udtos);
+		model.addAttribute("userRating", userRating);
 		
 	}
-
+		
+	@Override
+	public void myPageAcceptedComplete(HttpServletRequest request, Model model) throws Exception {
+		// TODO Auto-generated method stub
+		// apid , posting_user_uid , posting_pid 를 받아와야 된다. 
+		String[] apidArr = request.getParameterValues("apid");
+		String index = request.getParameter("index");
+		String apid = apidArr[Integer.parseInt(index)];
+		String user_uid = request.getParameter("user_uid");
+		String posting_pid = request.getParameter("posting_pid");
+		
+		// apid의 apcompletedate를 완료 누른 날짜로 바꿔주면 된다.
+		String columnname= "apcompletedate";
+		applyDAO.updateByApId(Integer.parseInt(apid) , columnname);
+		
+		// review 작성 화면에서 필요한 posting_user의 uimage를 가져온다. 
+		String posting_user_uimage = userDAO.selectUimage(user_uid);
+		
+		// review 작성하고 나서 데이터베이스에 넣어줄
+		// posting_user_uid 와 posting_pid 값을 넘겨준다. 
+		model.addAttribute("to_uid", user_uid );
+		model.addAttribute("posting_pid", posting_pid );
+		model.addAttribute("to_uimage", posting_user_uimage );
+				
+	}
+	
+	
 }

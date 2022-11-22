@@ -24,6 +24,14 @@
 		order by a.apdate desc limit #{start}  , #{rowLength}
 	</select>
 	
+	<update id="updateByApId">
+		update apply set ${columnname} = now() where apid = #{apid}
+	</update>
+	
+	<update id="updateByPId">
+		update apply set apcanceldate = now() where posting_pid = #{pid} and apmatchingdate is null
+	</update>
+	
 	<select id="acceptListRow" resultType="Integer">
 		select count(*) from apply where user_uid = #{uid} 
 		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
@@ -35,13 +43,21 @@
 		order by apmatchingdate 
 	</select>
 	
-	<update id="updateByApId">
-		update apply set ${columnname} = now() where apid = #{apid}
-	</update>
+	<select id="acceptedListRow" resultType="Integer">
+		select count(*) from apply where posting_user_uid = #{uid} 
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+	</select>
 	
-	<update id="updateByPId">
-		update apply set apcanceldate = now() where posting_pid = #{pid} and apmatchingdate is null
-	</update>
+	
+	<select id="acceptedGetList" resultType="com.petmily.customer.dto.ApplyDTO">
+		select a.apid , a.aptitle , a.apcontent, a.apdate , a.posting_pid , a.user_uid from apply a , posting p 
+		where a.posting_user_uid = #{uid}
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null 
+		and p.pid = a.posting_pid and p.pdeletedate is null 
+		order by a.apdate desc limit #{start}  , #{rowLength}
+	</select>
+	
+	
 	
 	
 </mapper>

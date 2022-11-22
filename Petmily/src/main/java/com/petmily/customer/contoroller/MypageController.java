@@ -17,7 +17,6 @@ public class MypageController {
 	@Autowired
 	MypageService service;
 	
-	@Autowired
 	HttpSession session;
 	
 	@RequestMapping("/mypage_modify")
@@ -103,6 +102,22 @@ public class MypageController {
 		service.myPageReviewInsert(request, session);
 		
 		return "redirect:mypage_accept_list";
+	}
+	
+	@RequestMapping("/mypage_accepted_list")
+	public String myPageAcceptedlist(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageAcceptedList(request, model, session);
+		
+		return "mypage_accepted_list";
+	}
+	
+	@RequestMapping("/mypage_accepted_complete")
+	public String myPageAcceptedComplete(HttpServletRequest request, Model model) throws Exception {
+		service.myPageAcceptedComplete(request, model);
+		
+		return "mypage_review";
 	}
 	
 }

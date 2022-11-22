@@ -19,5 +19,8 @@ public interface ApplyDAO {
 	
 	public List<Integer> acceptApidList(String uid) throws Exception; 
 	
+	public int acceptedListRow(String uid) throws Exception;
+	
+	public List<ApplyDTO> acceptedGetList(int rowLength,int start ,String uid ) throws Exception;
 	
 }
