@@ -34,7 +34,11 @@ chart2.render();
 
 	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 	
+	<h6>[마리 / 연도]</h6>
+	
 	<div style="padding-top: 5rem"></div>
 	
 	<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+	
+	<h6>[안락사 비율 / 연도]</h6>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

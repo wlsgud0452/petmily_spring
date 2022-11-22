@@ -18,10 +18,6 @@
 					<!-- <li class="nav-item"><a class="nav-link" href="#">등급혜택 보기</a>
 					</li> -->
 				</ul>
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#">내 채팅목록</a></li>
-					<!-- <li class="nav-item"><a class="nav-link" href="#">내 등급관리</a></li> -->
-				</ul>
 			</div>
 		</div>
 	</nav>

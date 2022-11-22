@@ -31,7 +31,26 @@
 			</div>
 		</div>
 		
+		
+		
 		<div style="padding-top: 5rem"></div>
+		
+		<div class="row justify-content-center text-center">
+			<h2 class="mb-3" style ="color: #e8853e;">함께해요! 유기동물 0%</h2>
+		</div>
+		
+		<div style="padding-top: 1rem"></div>
+		
+		<div class="row justify-content-center text-end">
+			<div class="col-11">
+				<h6 class="mb-3">서울 열린데이터 광장 서울시 유기동물보호 현황 통계 참고</h6>			
+			</div>
+		</div>
+		<div class="row justify-content-center text-end">
+			<div class="col-11">
+				<h6 class="mb-3">https://data.seoul.go.kr/dataList/369/S/2/datasetView.do</h6>			
+			</div>
+		</div>
 		
 		<div class="row justify-content-center">
 			<div class="col-11">
