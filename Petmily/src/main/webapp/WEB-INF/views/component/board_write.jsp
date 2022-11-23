@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 
 
@@ -82,9 +83,23 @@
 <form action="posting_write_inesrt" enctype="multipart/form-data" method="post" name="board_write">
 	<div class="container">
 		<div class="row text-center">
-			<h4>
-				<strong>게시물 작성</strong>
-			</h4>
+			
+			<c:choose>
+				<c:when test="${board_modify eq '1' }">
+					<h4>
+						<strong>게시물 수정</strong>
+					</h4>
+				</c:when>
+				
+				<c:otherwise>
+					<h4>
+						<strong>게시물 작성</strong>
+					</h4>
+				</c:otherwise>
+			
+			</c:choose>
+		
+			
 		</div>
 
 		<div class="row justify-content-center">

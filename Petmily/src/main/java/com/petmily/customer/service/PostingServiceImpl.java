@@ -333,4 +333,71 @@ public class PostingServiceImpl implements PostingService {
 		}
 		
 	}
+
+	@Override
+	public void postingUpdate(MultipartHttpServletRequest request, Model model, List<MultipartFile> multipartFiles, HttpSession session, RedirectAttributes redirectAttributes)
+			throws Exception {
+		// TODO Auto-generated method stub
+		int pid = Integer.parseInt(request.getParameter("pid"));
+		String pcategory = request.getParameter("pcategory");
+		String ptitle = request.getParameter("ptitle");
+		String pcontent = request.getParameter("pcontent");
+		String plocation_basic = request.getParameter("plocation_basic");
+		String plocation_detail = request.getParameter("plocation_detail");
+		String pimage1 = null;
+		String pimage2 = null;
+		String pimage3 = null;
+		
+		multipartFiles = request.getFiles("file");
+		
+		PostingDTO pimages = postingDAO.postingImagesId(pid);
+		
+		System.out.println("old"+pimages.getPimage1());
+		System.out.println("old"+pimages.getPimage2());
+		System.out.println("old"+pimages.getPimage3());
+		
+		int cnt = 1;
+		String path = System.getProperty("user.dir") + "//src//main//resources//static//posting//";
+		
+		if(multipartFiles != null) {
+		
+		File deleteFile = new File(path+pimages.getPimage1());
+		deleteFile.delete();
+		deleteFile = new File(path+pimages.getPimage2());
+		deleteFile.delete();
+		deleteFile = new File(path+pimages.getPimage3());
+		deleteFile.delete();
+		
+			for(MultipartFile file : multipartFiles) {
+				  
+				// 파일을 uid로 만들기 위한 기초단계
+				// 확장자 가져오기
+				String originalName = file.getOriginalFilename();
+				if(cnt == 1) {
+					originalName = pid + "_1_" + originalName;
+					pimage1 = originalName;
+				}else if (cnt == 2){
+					originalName = pid + "_2_" + originalName;
+					pimage2 = originalName;
+				}else if(cnt == 3) {
+					originalName = pid + "_3_" + originalName;
+					pimage3 = originalName;
+				}
+				// 파일 네임 짓기
+				// 패스에 "name" 으로 saveFile을 만들 빈 껍데기를 생성해 준다.
+				File saveFile = new File(path, originalName);
+				// file을 saveFile이름과 path로 지어서 넣기
+				file.transferTo(saveFile);
+				cnt++;
+			}
+		}
+		redirectAttributes.addAttribute("pcategory",pcategory);
+		redirectAttributes.addAttribute("page",1);
+		
+		postingDAO.postingUpdate(pid, ptitle, pcontent, plocation_basic, plocation_detail, pimage1, pimage2, pimage3);
+		
+		
+	
+	}
+	
 }

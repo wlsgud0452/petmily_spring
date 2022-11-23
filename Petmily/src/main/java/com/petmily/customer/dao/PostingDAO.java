@@ -34,5 +34,9 @@ public interface PostingDAO {
 	public List<PostingDTO> postingMypageWriteList(int start,int rowLength,String uid,String option,String pcategory, String query) throws Exception;
 
 	public List<String> postingGetUid(int pid) throws Exception;
+	
+	public PostingDTO postingImagesId(int pid) throws Exception;
+	
+	public void postingUpdate(int pid,String ptitle,String pcontent,String plocation_basic,String plocation_detail,String pimage1,String pimage2,String pimage3)throws Exception;
 
 }

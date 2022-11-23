@@ -29,4 +29,5 @@ public interface PostingService {
 	
 	public void postingDelete(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) throws Exception;
 	
+	public void postingUpdate(MultipartHttpServletRequest request, Model model, List<MultipartFile> multipartFiles, HttpSession session, RedirectAttributes redirectAttributes) throws Exception;
 }

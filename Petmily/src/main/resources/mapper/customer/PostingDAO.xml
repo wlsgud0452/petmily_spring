@@ -74,5 +74,13 @@
 		select user_uid from posting where pparentid = #{pid} order by pinitdate desc
 	</select>
 	
+	<select id="postingImagesId" resultType="com.petmily.customer.dto.PostingDTO">
+		select pimage1, pimage2, pimage3 from posting where pid = #{pid}
+	</select>
+	
+	<update id="postingUpdate">
+		update posting set ptitle = #{ptitle}, pcontent = #{pcontent}, plocation_basic = #{plocation_basic}, plocation_detail =  #{plocation_detail},pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3}, pupdatedate = now() 
+		where pid = #{pid}
+	</update>
 	
 </mapper>

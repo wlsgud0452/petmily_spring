@@ -99,6 +99,12 @@ public class PostingContoroller {
 		return ("redirect:posting");
 	}
 	
-	
+	@RequestMapping("posting_midify_update")
+	public String posting_midify_update(MultipartHttpServletRequest request, Model model, List<MultipartFile> multipartFiles, HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
+		
+		service.postingUpdate(request,model,multipartFiles, session, redirectAttributes);
+		
+		return ("redirect:posting");
+	}
 	
 }

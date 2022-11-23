@@ -114,4 +114,20 @@ public class PostingDAOImpl implements PostingDAO{
 		return sqlSession.selectList(nameSpace + ".postingGetUid");
 	}
 
+
+	@Override
+	public PostingDTO postingImagesId(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".postingImagesId");
+	}
+
+
+	@Override
+	public void postingUpdate(int pid, String ptitle, String pcontent, String plocation_basic, String plocation_detail,
+			String pimage1, String pimage2, String pimage3) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + ".postingUpdate");
+		
+	}
+
 }
