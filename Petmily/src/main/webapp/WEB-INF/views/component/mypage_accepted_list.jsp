@@ -79,7 +79,7 @@
 	<div class="container">
 		<div class="row my-3">
 			<h2>
-				<strong>신청수락내역</strong>
+				<strong>신청 수락된 내역</strong>
 				<h6>내가 신청 수락 해준 내역</h6>
 			</h2>
 		</div>
@@ -217,13 +217,13 @@
 						
 						<c:when test="${param.page > paging.startPage}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="posting?page=${param.page - 1}&pcategory=${param.pcategory }">Previous </a></li>
+							<li class="page-item"><a class="page-link" href="mypage_accepted_list?page=${param.page - 1}">Previous </a></li>
 						</c:when>
 
 						<c:otherwise>
 							<!-- else -->
 							<li class="page-item"><a class="page-link"
-								href="posting?page=${paging.startPage - 1}&pcategory=${param.pcategory }">Previous
+								href="mypage_accepted_list?page=${paging.startPage - 1}">Previous
 							</a></li>
 						</c:otherwise>
 
@@ -231,7 +231,7 @@
 					<!-- int = startPage; i <= endPage; i++ -->
 					<c:forEach var="count" begin="${paging.startPage}" end="${paging.endPage}">
 						<li class="page-item"><a class="page-link"
-							href="posting?page=${count}&pcategory=${param.pcategory }">${count}
+							href="mypage_accepted_list?page=${count}">${count}
 						</a></li>
 					</c:forEach>
 
@@ -244,12 +244,12 @@
 						
 						<c:when test="${param.page eq paging.endPage}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="posting?page=${paging.endPage + 1}&pcategory=${param.pcategory }">Next </a></li>
+							<li class="page-item"><a class="page-link" href="mypage_accepted_list?page=${paging.endPage + 1}">Next </a></li>
 						</c:when>
 						
 						<c:when test="${param.page < paging.endPage}">
 							<!-- if -->
-							<li class="page-item"><a class="page-link" href="posting?page=${param.page + 1}&pcategory=${param.pcategory }">Next </a></li>
+							<li class="page-item"><a class="page-link" href="mypage_accepted_list?page=${param.page + 1}">Next </a></li>
 						</c:when>
 
 					</c:choose>

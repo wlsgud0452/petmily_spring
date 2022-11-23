@@ -79,4 +79,10 @@ public class ApplyDAOImpl implements ApplyDAO {
 		return sqlSession.selectList(nameSpace + ".acceptedGetList");
 	}
 	
+	@Override
+	public List<Integer> completePId(String uid) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".completePId");
+	}
+	
 }

@@ -26,4 +26,6 @@ public interface ApplyDAO {
 	public List<ApplyDTO> acceptedGetList(int rowLength,int start ,String uid ) throws Exception;
 	
 	public void postingApplyInsert (String user_uid, int posting_pid, String posting_user_uid, String aptitle, String apcontent) throws Exception;
+	
+	public List<Integer> completePId(String uid) throws Exception;
 }

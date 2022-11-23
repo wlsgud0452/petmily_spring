@@ -29,12 +29,11 @@
 		update posting set pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3} where pid = #{lastPostingId}
 	</update>
 	
-
 	<select id="acceptPostingList" resultType="com.petmily.customer.dto.PostingDTO">
 		select p.pid , p.user_uid , p.pcategory , p.ptitle , p.pinitdate , p.plocation_basic
 		from posting p inner join apply a
 		where p.pid = a.posting_pid and a.user_uid = #{uid} 
-		and a.apcanceldate is null and a.apmatchingdate is not null and a.apcompletedate is null
+		and a.apcanceldate is null and a.apmatchingdate is not null and a.apcompletedate_request is null
 		order by a.apmatchingdate limit #{start}, #{rowLength}
 	</select>
 	
@@ -52,7 +51,7 @@
 	</insert>
 	
 	<select id="postingInfo" resultType="com.petmily.customer.dto.PostingDTO">
-		select pid, ptitle, pcontent, pimage1, pimage2, pimage3, pcategory, plocation_basic, plocation_detail , pinitdate from posting where pid = #{posting_pid}
+		select pid, ptitle, pcontent,user_uid ,pimage1, pimage2, pimage3, pcategory, plocation_basic, plocation_detail , pinitdate from posting where pid = #{posting_pid}
 	</select>
 	
 	<update id="postingDelete">
@@ -82,5 +81,5 @@
 		update posting set ptitle = #{ptitle}, pcontent = #{pcontent}, plocation_basic = #{plocation_basic}, plocation_detail =  #{plocation_detail},pimage1 = #{pimage1}, pimage2 = #{pimage2}, pimage3 = #{pimage3}, pupdatedate = now() 
 		where pid = #{pid}
 	</update>
-	
+
 </mapper>

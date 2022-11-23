@@ -51,14 +51,6 @@
 
 			<ul class="navbar-nav justify-content-end align-items-center">
 
-
-				<li class="nav-item"><a class="nav-link mx-2"
-					href="#"><i class="bi bi-send"
-						style="font-size: 1.5rem;"></i></a></li>
-
-				<li class="nav-item"><a class="nav-link mx-2" href="#"><i
-						class="bi bi-bell" style="font-size: 1.5rem;"></i></a></li>
-
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle mx-2" href="mypage_modify"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">

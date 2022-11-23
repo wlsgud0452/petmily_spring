@@ -6,20 +6,20 @@
 <mapper namespace="com.petmily.customer.dao.ApplyDAO">
 	
 	<select id="selectCategory" resultType="Integer">
-		select count(*) from apply a, posting p where a.apcompletedate is not null 
+		select count(*) from apply a, posting p where ( a.apcompletedate_request is not null or a.apcompletedate_response is not null) 
 		and ( a.user_uid = #{uid} or a.posting_user_uid = #{uid} ) 
 		and a.posting_pid = p.pid and p.pcategory = #{pcategory}
 	</select>
 	
 	<select id="applyListRow" resultType="Integer">
 		select count(*) from apply where posting_user_uid = #{uid} 
-		and apcanceldate is null and apmatchingdate is null and apcompletedate is null
+		and apcanceldate is null and apmatchingdate is null and apcompletedate_request is null and apcompletedate_response is null
 	</select>
 	
 	<select id="applyGetList" resultType="com.petmily.customer.dto.ApplyDTO">
 		select a.apid , a.aptitle , a.apcontent, a.apdate , a.posting_pid , a.user_uid from apply a , posting p 
 		where a.posting_user_uid = #{uid}
-		and apcanceldate is null and apmatchingdate is null and apcompletedate is null 
+		and apcanceldate is null and apmatchingdate is null and apcompletedate_request is null and apcompletedate_response is null 
 		and p.pid = a.posting_pid and p.pdeletedate is null 
 		order by a.apdate desc limit #{start}  , #{rowLength}
 	</select>
@@ -32,35 +32,32 @@
 		update apply set apcanceldate = now() where posting_pid = #{pid} and apmatchingdate is null
 	</update>
 	
-	<select id="acceptListRow" resultType="Integer">
+	<select id="acceptListRow" resultType="int">
 		select count(*) from apply where user_uid = #{uid} 
-		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate_request is null
 	</select>
 	
-	<select id="acceptApidList" resultType="Integer">
+	<select id="acceptApidList" resultType="int">
 		select apid from apply where user_uid = #{uid}
-		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate_request is null
 		order by apmatchingdate 
 	</select>
 	
-	<select id="acceptedListRow" resultType="Integer">
+	<select id="acceptedListRow" resultType="int">
 		select count(*) from apply where posting_user_uid = #{uid} 
-		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate_response is null
 	</select>
 	
 	
 	<select id="acceptedGetList" resultType="com.petmily.customer.dto.ApplyDTO">
 		select a.apid , a.aptitle , a.apcontent, a.apdate , a.posting_pid , a.user_uid from apply a , posting p 
 		where a.posting_user_uid = #{uid}
-		and apcanceldate is null and apmatchingdate is not null and apcompletedate is null 
+		and apcanceldate is null and apmatchingdate is not null and apcompletedate_response is null 
 		and p.pid = a.posting_pid and p.pdeletedate is null 
 		order by a.apdate desc limit #{start}  , #{rowLength}
 	</select>
-	
-	
-	
 
-	<select id="applyUserCount" resultType="Integer">
+	<select id="applyUserCount" resultType="int">
 		select count(apid) from apply where user_uid = #{user_uid} and posting_pid = #{posting_pid}
 	</select>
 	
@@ -68,5 +65,12 @@
 		insert into apply (user_uid, posting_pid, posting_user_uid, aptitle, apcontent, apdate) 
 		values (#{user_uid},#{posting_pid},#{posting_user_uid},#{aptitle},#{apcontent},now())
 	</insert>
+	
+	<select id="completePId" resultType="int">
+		select posting_pid from apply where 
+		(user_uid =#{uid} and (apcompletedate_request is not null or apcompletedate_response is not null)) 
+		 or
+		(posting_user_uid =#{uid} and (apcompletedate_request is not null or apcompletedate_response is not null)) 
+	</select>
 	
 </mapper>

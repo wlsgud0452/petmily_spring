@@ -34,6 +34,7 @@ public class PetDictionaryServiceImpl implements PetDictionaryService {
 		
 		String pscontent = petspecDAO.pscontent(psbreeds);
 		
+		model.addAttribute("psbreeds", psbreeds);
 		model.addAttribute("pscontent", pscontent);
 		model.addAttribute("content_viewpage", "pet_dictionary_detail.jsp");
 	}

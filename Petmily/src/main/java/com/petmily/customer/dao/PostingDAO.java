@@ -33,6 +33,10 @@ public interface PostingDAO {
 	
 	public List<PostingDTO> postingMypageWriteList(int start,int rowLength,String uid,String option,String pcategory, String query) throws Exception;
 
+	public int postingParticipateListRow(String uid , String pcategory) throws Exception;
+	
+	public List<PostingDTO> postingMypageParticipateList(int start,int rowLength,String uid,String option,String pcategory, String query) throws Exception;
+
 	public List<String> postingGetUid(int pid) throws Exception;
 	
 	public PostingDTO postingImagesId(int pid) throws Exception;

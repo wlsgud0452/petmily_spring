@@ -113,6 +113,19 @@ public class PostingDAOImpl implements PostingDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + ".postingGetUid");
 	}
+	
+	@Override
+	public int postingParticipateListRow(String uid, String pcategory) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public List<PostingDTO> postingMypageParticipateList(int start, int rowLength, String uid, String option,
+			String pcategory, String query) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".postingMypageParticipateList");
+	}
 
 
 	@Override
