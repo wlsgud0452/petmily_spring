@@ -120,7 +120,7 @@ public class PostingServiceImpl implements PostingService {
 		
 		for(MultipartFile file : multipartFiles) {
 			  
-			String path = System.getProperty("user.dir") + "//src//main//resources//static//posting";
+			String path = System.getProperty("user.dir") + "//src//main//webapp//posting";
 
 			// 파일을 uid로 만들기 위한 기초단계
 			// 확장자 가져오기
