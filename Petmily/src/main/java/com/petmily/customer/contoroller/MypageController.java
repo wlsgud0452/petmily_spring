@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.petmily.customer.service.MypageService;
 
@@ -96,12 +97,12 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/review_insert")
-	public String myPageReviewInsert(HttpServletRequest request, HttpSession session) throws Exception {
+	public String myPageReviewInsert(HttpServletRequest request, HttpSession session , RedirectAttributes  redirectAttributes) throws Exception {
 		session = request.getSession();
 		
-		service.myPageReviewInsert(request, session);
+		service.myPageReviewInsert(request, session , redirectAttributes);
 		
-		return "redirect:mypage_accept_list";
+		return "redirect:mypage_participate_list";
 	}
 	
 	@RequestMapping("/mypage_accepted_list")
@@ -127,6 +128,15 @@ public class MypageController {
 		service.myPageWriteList(request, model, session);
 		
 		return "mypage_write_list";
+	}
+	
+	@RequestMapping("/mypage_participate_list")
+	public String myPageParticipateList(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
+		
+		service.myPageParticipateList(request, model, session);
+		
+		return "mypage_participate_list";
 	}
 	
 }

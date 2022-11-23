@@ -9,6 +9,19 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	title: {
 		text: "년도별 유기동물 수"
 	},
+	axisX:{      
+		interval: 1,
+		intervalType: "year",
+		labelFontColor: "rgb(61, 61, 61)"
+	},
+	axisY: {
+		title: "유기동물 수",
+		interlacedColor: "#ffebd6",
+		gridThickness: 0,
+		tickColor: "azure",
+		titleFontColor: "rgb(61, 61, 61)",
+		interval: 2000
+	},
 	data: [{
 		type: "column", //change type to bar, line, area, pie, etc
 		dataPoints: ${dataPoints}
@@ -22,8 +35,22 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 	title: {
 		text: "년도별 안락사 비율"
 	},
+	axisX:{      
+		interval: 1,
+		intervalType: "year",
+		labelFontColor: "rgb(61, 61, 61)"
+	},
+	axisY: {
+		title: "안락사 비율",
+		interlacedColor: "#ffebd6",
+		gridThickness: 0,
+		tickColor: "azure",
+		titleFontColor: "rgb(61, 61, 61)",
+		interval: 10,
+	},
 	data: [{
 		type: "line", //change type to bar, line, area, pie, etc
+		color: "#99582c",
 		dataPoints: ${euthanasiaRatio}
 	}]
 });

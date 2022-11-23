@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.petmily.customer.dao.ApplyDAO;
 import com.petmily.customer.dao.LecturecheckDAO;
@@ -19,7 +20,7 @@ import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.ApplyDTO;
 import com.petmily.customer.dto.PagingDTO;
 import com.petmily.customer.dto.PostingDTO;
-import com.petmily.customer.dto.ShowDTO;
+import com.petmily.customer.dto.ReviewDTO;
 import com.petmily.customer.dto.UserDTO;
 
 @Service
@@ -250,11 +251,11 @@ public class MypageServiceImpl implements MypageService {
 	public void myPageApplyUpdate(HttpServletRequest request) throws Exception {
 		String index = request.getParameter("index");
 		String[] apidArr = request.getParameterValues("apid");
-		String[] pidArr = request.getParameterValues("pid");
+		String[] pidArr = request.getParameterValues("posting_pid");
 
 		// index로 어떤 apid에서 선택 된 것인지 알아오기
 		String apid = apidArr[Integer.parseInt(index)];
-		String pid = apidArr[Integer.parseInt(index)];
+		String pid = pidArr[Integer.parseInt(index)];
 
 		String columnname = "";
 
@@ -264,6 +265,7 @@ public class MypageServiceImpl implements MypageService {
 
 		applyDAO.updateByApId(Integer.parseInt(apid), columnname);
 		applyDAO.updateByPId(Integer.parseInt(pid));
+		postingDAO.postingDelete(Integer.parseInt(pid));
 	}
 	
 	@Override
@@ -328,8 +330,9 @@ public class MypageServiceImpl implements MypageService {
 		String posting_user_uid = request.getParameter("posting_user_uid");
 		String posting_pid = request.getParameter("posting_pid");
 		
+		
 		// apid의 apcompletedate를 완료 누른 날짜로 바꿔주면 된다.
-		String columnname= "apcompletedate";
+		String columnname= "apcompletedate_request";
 		applyDAO.updateByApId(Integer.parseInt(apid) , columnname);
 		
 		// review 작성 화면에서 필요한 posting_user의 uimage를 가져온다. 
@@ -344,7 +347,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public void myPageReviewInsert(HttpServletRequest request, HttpSession session) throws Exception {
+	public void myPageReviewInsert(HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 		String revtext = request.getParameter("content");
 		String revrating = request.getParameter("reviewStar");
 		
@@ -353,7 +356,9 @@ public class MypageServiceImpl implements MypageService {
 		String posting_pid = request.getParameter("posting_pid");
 		String to_uid = request.getParameter("to_uid");
 		
-		reviewDAO.insert(revtext, Integer.parseInt(revrating) , from_uid , posting_pid , to_uid);
+		reviewDAO.insert(revtext, Integer.parseInt(revrating) * 2 , from_uid , posting_pid , to_uid);
+		
+		redirectAttributes.addAttribute("page", 1);
 		
 	}
 	
@@ -418,7 +423,7 @@ public class MypageServiceImpl implements MypageService {
 		String posting_pid = request.getParameter("posting_pid");
 		
 		// apid의 apcompletedate를 완료 누른 날짜로 바꿔주면 된다.
-		String columnname= "apcompletedate";
+		String columnname= "apcompletedate_response";
 		applyDAO.updateByApId(Integer.parseInt(apid) , columnname);
 		
 		// review 작성 화면에서 필요한 posting_user의 uimage를 가져온다. 
@@ -501,5 +506,64 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 	
-	
+	@Override
+	public void myPageParticipateList(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		int cPage = 0;
+		int pageLength = 5;
+		int totalRows = 0;
+		int rowLength=5;
+		UserDTO udto = (UserDTO)session.getAttribute("user");
+		String uid = udto.getUid();
+		String tempPage = request.getParameter("page");
+		String pcategory_temp1 = request.getParameter("pcategory");
+		String pcategory_temp2 = (String) request.getAttribute("pcategory");
+		String pcategory = "";
+		
+		String option = request.getParameter("option");
+		String query = request.getParameter("query");
+		
+		if(pcategory_temp1 == null || pcategory_temp1.equals("")) {
+			pcategory = pcategory_temp2;
+		}
+		
+		if(pcategory_temp2 == null || pcategory_temp2.equals("")) {
+			pcategory = pcategory_temp1;
+		}
+		
+		if(option == null) {
+			option = "ptitle";
+		}
+		if(query == null) {
+			query = "";
+		}
+		
+		if(tempPage == null || tempPage.length()==0) {
+			cPage = 1;
+		}
+		try {
+			cPage = Integer.parseInt(tempPage);
+		} catch (Exception e) {
+			cPage = 1;
+		}
+		
+		List<Integer> pidList = applyDAO.completePId(uid);
+		
+		System.out.println(pidList.size());
+		
+		totalRows = reviewDAO.selectCountReview(pidList, uid);
+		
+		System.out.println(totalRows);
+		
+		PagingDTO dto = new PagingDTO(cPage, totalRows, pageLength);
+		int start = (cPage - 1) * rowLength;
+		
+		// 요 pidList로 review list를 만들어야 되는데
+		// 이 때 to_uid 가 나인것만 골라오면 된다. 그리고 paging에 맞게 limit를 걸면 된다.
+		List<ReviewDTO> dtos = reviewDAO.selectReview(pidList , uid , start , rowLength);
+		
+		
+		model.addAttribute("paging", dto);
+		model.addAttribute("reviewList", dtos);
+	}
 }

@@ -32,11 +32,10 @@
 		</div>
 		
 		
-		
 		<div style="padding-top: 5rem"></div>
 		
 		<div class="row justify-content-center text-center">
-			<h2 class="mb-3" style ="color: #e8853e;">함께해요! 유기동물 0%</h2>
+			<h2 class="mb-3" style ="color: #e8853e;">당신은 가족을 버리나요? 반려동물도 가족입니다.</h2>
 		</div>
 		
 		<div style="padding-top: 1rem"></div>

@@ -41,7 +41,7 @@
 	<ul class="nav flex-column">
 	 
 		<li class="nav-item my-2">
-			<a class="nav-link" href="mypage_participate_list" style="color:black;"><p class="h5">완료 내역</p></a>
+			<a class="nav-link" href="mypage_participate_list?page=1" style="color:black;"><p class="h5">후기 내역</p></a>
 		</li>
 		
 		<li class="nav-item my-2">
