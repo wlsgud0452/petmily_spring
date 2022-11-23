@@ -1,5 +1,7 @@
 package com.petmily.customer.dao;
 
+import java.util.List;
+
 import com.petmily.customer.dto.UserDTO;
 
 public interface UserDAO {
@@ -23,4 +25,11 @@ public interface UserDAO {
 	
 	public void updateUimage(String uid, String uimage) throws Exception;
 
+	public int countId(String uname,String uemail) throws Exception;
+	
+	public List<String> selectId(String uname,String uemail) throws Exception;
+
+	public int countIdPw(String uid,String uemail) throws Exception;
+	
+	public String selectPw(String uid,String uemail) throws Exception;
 }

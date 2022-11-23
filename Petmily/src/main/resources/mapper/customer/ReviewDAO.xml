@@ -5,7 +5,7 @@
 
 <mapper namespace="com.petmily.customer.dao.ReviewDAO">
 
-	<select id="selectRating" resultType="int">
+	<select id="selectRating" resultType="Integer">
 		select round(sum(revrating) / count(*)) from
 		review where to_uid = #{uid} group by to_uid
 	</select>
@@ -20,23 +20,31 @@
 
 	<select id="selectReview"
 		resultType="com.petmily.customer.dto.ReviewDTO" parameterType="java.util.List">
-		select * from review where posting_pid in
-		<foreach collection="pidList" item="pid" open="("
-			separator=" , " close=")">
-			#{pid}
-		</foreach>
-		and to_uid = #{to_uid}
+		select * from review where
+		<if test='pidList.size() >= 1'>
+			posting_pid in
+			<foreach collection="pidList" item="pid" open="("
+				separator=" , " close=")">
+				#{pid}
+			</foreach>
+			and 
+		</if>
+		to_uid = #{to_uid}
 		limit #{start} , #{rowLength}
 	</select>
 	
 	<select id="selectCountReview"
-		resultType="int" parameterType="java.util.List">
-		select count(*) from review where posting_pid in
-		<foreach collection="pidList" item="pid" open="("
-			separator=" , " close=")">
-			#{pid}
-		</foreach>
-		and to_uid = #{to_uid}
+		resultType="Integer" parameterType="java.util.List">
+		select count(*) from review where 
+		<if test='pidList.size() >= 1'>
+			posting_pid in
+			<foreach collection="pidList" item="pid" open="("
+				separator=" , " close=")">
+				#{pid}
+			</foreach>
+			and 
+		</if>
+		to_uid = #{to_uid}
 	</select>
 
 </mapper>

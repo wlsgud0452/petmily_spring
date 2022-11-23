@@ -32,7 +32,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 	
 	@Override
-	public int selectCountReview(List<Integer> pidList, String to_uid) throws Exception {
+	public Integer selectCountReview(List<Integer> pidList, String to_uid) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(nameSpace + ".selectCountReview");
 	}

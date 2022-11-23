@@ -45,4 +45,20 @@
 		update user set uimage = #{uimage} where uid = #{uid}
 	</update>
 	
+	<select id="countId" resultType="int">
+		select count(*) from user where uname = #{uname} and uemail = #{uemail}
+	</select>
+	
+	<select id="selectId" resultType="String">
+		select uid from user where uname = #{uname} and uemail = #{uemail}
+	</select>
+	
+	<select id="countIdPw" resultType="int">
+		select count(*) from user where uid = #{uid} and uemail = #{uemail}
+	</select>
+	
+	<select id="selectPw" resultType="String">
+		select upw from user where uid = #{uid} and uemail = #{uemail}
+	</select>
+	
 </mapper>

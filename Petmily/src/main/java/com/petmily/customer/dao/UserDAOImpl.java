@@ -1,5 +1,7 @@
 package com.petmily.customer.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.petmily.customer.dto.UserDTO;
@@ -66,5 +68,29 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + ".updateImage");
 	}
-
+	
+	@Override
+	public int countId(String uname, String uemail) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".countId");
+	}
+	
+	@Override
+	public List<String> selectId(String uname, String uemail) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + ".selectId");
+	}
+	
+	@Override
+	public int countIdPw(String uid, String uemail) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".countIdPw");
+	}
+	
+	
+	@Override
+	public String selectPw(String uid, String uemail) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + ".selectPw");
+	}
 }

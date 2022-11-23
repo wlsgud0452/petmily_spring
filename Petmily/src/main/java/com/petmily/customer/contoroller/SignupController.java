@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.petmily.customer.service.SignupService;
 
@@ -28,6 +29,14 @@ public class SignupController {
 	@RequestMapping("/signup_form")
 	public String signupForm() {
 		return "signup_page";
+	}
+	
+	@RequestMapping("/sign_up_kakao")
+	public String signupKakao(HttpServletRequest request , Model model , RedirectAttributes redirectAttributes) throws Exception {
+		
+		service.signupKakao(request, model, redirectAttributes);
+		
+		return "redirect:signup_form";
 	}
 
 	@RequestMapping(value = "/sign_up_id_check", method = RequestMethod.POST)

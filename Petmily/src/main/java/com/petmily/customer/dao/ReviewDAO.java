@@ -11,5 +11,5 @@ public interface ReviewDAO {
 
 	public List<ReviewDTO> selectReview( List<Integer> pidList , String to_uid , int  start , int rowLength) throws Exception;
 	
-	public int selectCountReview( List<Integer> pidList , String to_uid ) throws Exception;
+	public Integer selectCountReview( List<Integer> pidList , String to_uid ) throws Exception;
 }

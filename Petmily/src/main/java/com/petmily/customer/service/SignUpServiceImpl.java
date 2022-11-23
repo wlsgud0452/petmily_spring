@@ -16,12 +16,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.petmily.customer.api.KakaoAPI;
 import com.petmily.customer.dao.ChooseDAO;
 import com.petmily.customer.dao.PetDAO;
 import com.petmily.customer.dao.PetspecDAO;
 import com.petmily.customer.dao.UserDAO;
 import com.petmily.customer.dto.ChooseDTO;
+import com.petmily.customer.dto.KakaoDTO;
 import com.petmily.customer.dto.PetDTO;
 
 @Service
@@ -41,6 +44,24 @@ public class SignUpServiceImpl implements SignupService {
 
 	@Autowired
 	JavaMailSender javaMailSender;
+	
+	@Autowired
+	KakaoAPI kakaoAPI;
+	
+	@Override
+	public void signupKakao(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes)
+			throws Exception {
+		// TODO Auto-generated method stub
+		String code = request.getParameter("code");
+		String access_token = kakaoAPI.getToken(code);
+		KakaoDTO kakao = kakaoAPI.getKakao(access_token);
+		
+		redirectAttributes.addFlashAttribute("kakao", kakao);
+		
+		kakaoAPI.unlink(kakao.getId(),access_token);
+		
+	}
+	
 
 	@Override
 	public void signup(MultipartHttpServletRequest request, Model model, MultipartFile file) throws Exception {
