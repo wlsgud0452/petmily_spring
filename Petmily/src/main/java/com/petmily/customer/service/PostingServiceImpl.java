@@ -117,31 +117,35 @@ public class PostingServiceImpl implements PostingService {
 		lastPostingId = postingDAO.postingGetId(user_uid);
 		
 		int cnt = 1;
-		
-		for(MultipartFile file : multipartFiles) {
-			  
-			String path = System.getProperty("user.dir") + "//src//main//webapp//posting";
+		if(!multipartFiles.isEmpty()) {
+			
+			for(MultipartFile file : multipartFiles) {
+				  
+				String path = System.getProperty("user.dir") + "//src//main//webapp//posting";
 
-			// 파일을 uid로 만들기 위한 기초단계
-			// 확장자 가져오기
-			String originalName = file.getOriginalFilename();
-			if(cnt == 1) {
-				originalName = lastPostingId + "_1_" + originalName;
-				pimage1 = originalName;
-			}else if (cnt == 2){
-				originalName = lastPostingId + "_2_" + originalName;
-				pimage2 = originalName;
-			}else if(cnt == 3) {
-				originalName = lastPostingId + "_3_" + originalName;
-				pimage3 = originalName;
+				// 파일을 uid로 만들기 위한 기초단계
+				// 확장자 가져오기
+				String originalName = file.getOriginalFilename();
+				if(cnt == 1) {
+					originalName = lastPostingId + "_1_" + originalName;
+					pimage1 = originalName;
+				}else if (cnt == 2){
+					originalName = lastPostingId + "_2_" + originalName;
+					pimage2 = originalName;
+				}else if(cnt == 3) {
+					originalName = lastPostingId + "_3_" + originalName;
+					pimage3 = originalName;
+				}
+				// 파일 네임 짓기
+				// 패스에 "name" 으로 saveFile을 만들 빈 껍데기를 생성해 준다.
+				File saveFile = new File(path, originalName);
+				// file을 saveFile이름과 path로 지어서 넣기
+				file.transferTo(saveFile);
+				cnt++;
 			}
-			// 파일 네임 짓기
-			// 패스에 "name" 으로 saveFile을 만들 빈 껍데기를 생성해 준다.
-			File saveFile = new File(path, originalName);
-			// file을 saveFile이름과 path로 지어서 넣기
-			file.transferTo(saveFile);
-			cnt++;
 		}
+		
+		
 		redirectAttributes.addAttribute("pcategory",pcategory);
 		redirectAttributes.addAttribute("page",1);
 		
@@ -359,7 +363,7 @@ public class PostingServiceImpl implements PostingService {
 		int cnt = 1;
 		String path = System.getProperty("user.dir") + "//src//main//resources//static//posting//";
 		
-		if(multipartFiles != null) {
+		if(!multipartFiles.isEmpty()) {
 		
 		File deleteFile = new File(path+pimages.getPimage1());
 		deleteFile.delete();

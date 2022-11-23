@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface MypageService {
@@ -11,6 +13,8 @@ public interface MypageService {
 	public int myPageModifyLogin(HttpServletRequest request ,HttpSession session) throws Exception;
 	
 	public void myPageModifyUpdate(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
+	
+	public void myPageModifyUpdateComplete(MultipartHttpServletRequest request, Model model, MultipartFile file , HttpSession session) throws Exception;
 	
 	public void myPageChallenge(HttpServletRequest request, Model model ,HttpSession session) throws Exception;
 	

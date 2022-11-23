@@ -26,7 +26,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, Model model) throws Exception {
-		UserDTO dto = service.login(request, model);
+		UserDTO dto = service.login(request, model , session);
 		
 		if (dto == null) {
 			return "login";

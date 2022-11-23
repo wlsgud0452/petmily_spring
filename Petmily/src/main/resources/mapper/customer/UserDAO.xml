@@ -10,13 +10,13 @@
 	</select>
 	
 	<select id="login" resultType="com.petmily.customer.dto.UserDTO">
-		select count(*), uid , uname, utype, uimage from user where uid = #{uid} and upw = #{upw}
+		select count(*), uid ,upw , uname, utype, uimage from user where uid = #{uid} and upw = #{upw}
 	</select>
 	
 	<insert id="insert">
-		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress_basic, uaddress_detail, utype, uimage , uinitdate) 
+		insert into user (uid,upw,uname,uphone,uemail,unickname,uaddress_basic, uaddress_detail, utype , uinitdate) 
 		values 
-		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress_basic} , #{uaddress_detail} , #{utype} ,#{uimage} , now())
+		(#{uid} , #{upw} , #{uname} , #{uphone} , #{uemail} , #{unickname} , #{uaddress_basic} , #{uaddress_detail} , #{utype} , now())
 	</insert>
 	
 	<select id="registerCheck" resultType="Integer">
@@ -35,5 +35,14 @@
 		select uimage from user where uid = #{postingUid}
 	</select>
 	
+	<update id="updateUser">
+		update user set uname = #{uname} , unickname = #{unickname} , uemail = #{uemail}, uphone = #{uphone}, 
+		uaddress_basic = #{uaddress_basic}, uaddress_detail = #{uaddress_detail}
+		where uid = #{uid}
+	</update>
+	
+	<update id="updateUimage">
+		update user set uimage = #{uimage} where uid = #{uid}
+	</update>
 	
 </mapper>

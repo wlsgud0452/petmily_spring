@@ -1,6 +1,7 @@
 package com.petmily.customer.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,20 @@ public class LoginServiceImpl implements LoginService{
 	UserDAO userDAO;
 	
 	@Override
-	public UserDTO login(HttpServletRequest request, Model model) throws Exception {
+	public UserDTO login(HttpServletRequest request, Model model , HttpSession session) throws Exception {
+		session = request.getSession();
 		
-		String uid = request.getParameter("uid");
-		String upw = request.getParameter("upw");
+		String uid = "";
+		String upw = "";
+		
+		if(session.getAttribute("user") == null) {
+			 uid = request.getParameter("uid");
+			 upw = request.getParameter("upw");
+		}else {
+			UserDTO userDTO = (UserDTO) session.getAttribute("user");
+			uid = userDTO.getUid();
+			upw = userDTO.getUpw();
+		}
 		
 		int result = userDAO.userPwCheck(uid, upw);
 		
